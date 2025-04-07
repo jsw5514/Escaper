@@ -39,36 +39,36 @@
 <br>
 <br>
 게임 실행 흐름<br>
-### 시작화면 ###
+### 시작화면 ###<br>
 ![Image](https://github.com/user-attachments/assets/da2e0450-4744-42bc-9c88-2df6592d1436)
 <br>
 시작버튼 클릭-> 게임화면으로 이동<br>
 리더보드 버튼 클릭 -> 리더보드 화면으로 이동<br>
 종료버튼 클릭 -> 앱 종료<br>
 <br>
-### 게임화면 ###
+### 게임화면 ###<br>
 ![Image](https://github.com/user-attachments/assets/ae946dc7-3031-4559-95dc-6f579c18c18a)
 <br>
 일시정지 버튼 -> 게임 일시정지 및 일시정지 메뉴 표시<br>
 화면 슬라이드 -> 플레이어 캐릭터 이동<br>
 <br>
-### 일시정지 메뉴 ###
+### 일시정지 메뉴 ###<br>
 ![Image](https://github.com/user-attachments/assets/70a4ede5-12ae-40be-b797-4db5fc9a8d4e)
 <br>
 구현시에는 resume->'이어서 하기', give up->'종료하기' 로 수정 예정<br>
 이어서하기 -> 일시정지 해제 후 재개<br>
 종료하기 -> 시작화면으로 이동<br>
 <br>
-### 플레이어 캐릭터 이동 설명 ###
+### 플레이어 캐릭터 이동 설명 ###<br>
 화면(어디든지)을 슬라이드하면 그 방향으로 캐릭터가 한 칸 이동<br>
 <br>
-### 이동 화면 예시 ###
+### 이동 화면 예시 ###<br>
 화면을 터치하면 그 방향에 흐릿한 원이 생기고 슬라이드하면 그대로 따라간다.<br>
 <br>
-### 평상시(터치 입력이 없을때) ###
+### 평상시(터치 입력이 없을때) ###<br>
 ![Image](https://github.com/user-attachments/assets/7ff8b3e7-f3f7-4b09-93e5-795acb217034)
 
-### 터치 시(화면 오른쪽에 원 표시) ###
+### 터치 시(화면 오른쪽에 원 표시) ###<br>
 ![Image](https://github.com/user-attachments/assets/581a0461-f3b8-47cd-baba-e47eaaace8b5)
 
 개발 일정<br>
