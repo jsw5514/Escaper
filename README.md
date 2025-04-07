@@ -49,6 +49,12 @@
 리더보드 버튼 클릭 -> 리더보드 화면으로 이동<br>
 종료버튼 클릭 -> 앱 종료<br>
 <br>
+
+### 리더보드 화면 ###
+![Image](https://github.com/user-attachments/assets/f34e3d1b-73a5-4242-9cde-2f23eebcaf36)
+최고점수를 기록하는 리더보드
+리더보드 밖 클릭 -> 시작화면으로 이동
+
 ### 게임화면 ###
 
 ![Image](https://github.com/user-attachments/assets/ae946dc7-3031-4559-95dc-6f579c18c18a)
