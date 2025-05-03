@@ -1,5 +1,6 @@
 package com.swjeon.escaper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         //set listeners
         binding.btStart.setOnClickListener(listenerStart);
@@ -34,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //call game activity
-            Log.e(TAG,"GameActivity is not yet implemented");
-            throw new RuntimeException("not yet implemented");
+            Intent gameActivityIntent = new Intent(v.getContext(), GameActivity.class);
+            startActivity(gameActivityIntent);
         }
     };
     private final View.OnClickListener listenerLeaderBoard = new View.OnClickListener() {
