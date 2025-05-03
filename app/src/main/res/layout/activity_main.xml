@@ -11,16 +11,19 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="시작"/>
+        android:text="시작"
+        android:id="@+id/btStart"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="리더보드"/>
+        android:text="리더보드"
+        android:id="@+id/btLeaderBoard"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="종료"/>
+        android:text="종료"
+        android:id="@+id/btLeave"/>
 
 </LinearLayout>
