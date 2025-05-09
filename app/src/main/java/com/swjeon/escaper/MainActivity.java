@@ -5,12 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.swjeon.escaper.databinding.ActivityMainBinding;
 
@@ -36,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //call game activity
-            Intent gameActivityIntent = new Intent(v.getContext(), GameActivity.class);
+            Intent gameActivityIntent = new Intent(v.getContext(), EscaperActivity.class);
             startActivity(gameActivityIntent);
         }
     };
