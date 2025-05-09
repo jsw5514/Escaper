@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Escaper"
 include(":app")
- 
+include(":a2dg")
