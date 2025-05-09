@@ -20,6 +20,7 @@
         style="@style/ActivityMainButtonStyle"/>
 
     <Button
+        android:id="@+id/btLeave"
         android:text="종료"
         style="@style/ActivityMainButtonStyle"/>
 
