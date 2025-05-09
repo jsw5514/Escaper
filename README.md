@@ -87,8 +87,8 @@
 ![Image](https://github.com/user-attachments/assets/581a0461-f3b8-47cd-baba-e47eaaace8b5)
 
 개발 일정<br>
-1주차: 미로 맵 디자인, 조이스틱 이동 구현 시작<br>
-2주차: 조이스틱 이동 구현<br>
+1주차: 미로 맵 디자인, 플레이어 이동 구현 시작<br>
+2주차: 플레이어 이동 구현<br>
 3주차: NPC, 아이템 추가<br>
 4주차: NPC, 아이템 충돌감지<br>
 5주차: 점수 계산 추가<br>
