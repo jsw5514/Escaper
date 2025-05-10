@@ -7,9 +7,14 @@ import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;
 public class MainScene extends Scene {
     TiledMapManager mapManager;
     Context context;
+    public enum Layer{
+        map;
+        public static final int COUNT = values().length;
+    }
     public MainScene(Context context){
-        this.context=context;
+        initLayers(Layer.COUNT);
 
+        this.context=context;
         this.mapManager = new TiledMapManager(context);
     }
 }
