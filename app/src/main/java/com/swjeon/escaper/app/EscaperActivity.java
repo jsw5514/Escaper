@@ -1,6 +1,8 @@
-package com.swjeon.escaper;
+package com.swjeon.escaper.app;
 
 import android.os.Bundle;
+
+import com.swjeon.escaper.BuildConfig;
 
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.activity.GameActivity;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;

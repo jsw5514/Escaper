@@ -1,4 +1,4 @@
-package com.swjeon.escaper;
+package com.swjeon.escaper.app;
 
 import android.content.Intent;
 import android.os.Bundle;
