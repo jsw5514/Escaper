@@ -19,7 +19,7 @@ public class TiledMapManager {
     private final String TAG = this.getClass().getSimpleName();
     private final Context context;
     private final static int[] MAP_IDS = new int[]{R.raw.maze_1,R.raw.maze_2,R.raw.maze_3};
-    private ArrayList<int[]> maps;
+    private ArrayList<TiledMap> maps;
     TiledMapManager(Context appContext){
         this.context = appContext;
         loadMaps();
@@ -58,7 +58,7 @@ public class TiledMapManager {
             }
         }
 
-        //가져온 json 객체에서 맵 데이터 추출
+        //가져온 json 객체에서 맵 데이터 추출(단일 레이어 맵을 가정)
         maps = new ArrayList<>();
         for(JSONObject mapData :mapDatas){
             try {
@@ -67,11 +67,14 @@ public class TiledMapManager {
                 for(int i = 0; i < map.length; i++){
                     map[i] = jsonMap.getInt(i);
                 }
-                maps.add(map);
+                maps.add(new TiledMap(map));
             } catch (JSONException e) {
                 Log.e(TAG,"error while converting json to integer");
                 return;
             }
         }
+    }
+    public TiledMap getMap(int mapIndex){
+        return maps.get(mapIndex);
     }
 }

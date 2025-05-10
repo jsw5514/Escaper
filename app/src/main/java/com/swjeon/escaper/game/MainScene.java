@@ -16,5 +16,7 @@ public class MainScene extends Scene {
 
         this.context=context;
         this.mapManager = new TiledMapManager(context);
+
+        add(Layer.map, mapManager.getMap(0));
     }
 }
