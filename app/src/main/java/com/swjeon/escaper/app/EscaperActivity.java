@@ -12,9 +12,9 @@ import kr.ac.tukorea.ge.spgp2025.a2dg.framework.view.Metrics;
 public class EscaperActivity extends GameActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         GameView.drawsDebugStuffs = BuildConfig.DEBUG;
-        Metrics.setGameSize(210,210);
+        Metrics.setGameSize(2100f,2100f);
+        super.onCreate(savedInstanceState);
         new MainScene(getApplicationContext()).push();
     }
 }
