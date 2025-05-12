@@ -101,4 +101,7 @@ TildeMap.java<br>
 타일맵 정상적으로 로딩하도록 수정<br>
 drawTileAt에서 Rect 객체를 반복생성하지 않도록 최적화 필요<br>
 타일을 매번 로드하지 않게 오브젝트 풀링 적용<br>
+<br>
+TileBitmapPool.java<br>
+FlipedBitmapId 클래스에서 mipmapResId 대신 rawgid를 사용하도록 수정<br>
 
