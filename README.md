@@ -112,7 +112,7 @@ FlipedBitmapId 클래스에서 mipmapResId 대신 rawgid를 사용하도록 수�
 
 
 
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 간단한 소개
 플레이어가 장애물을 피하고 아이템을 획득해 미로를 탈출하는 퍼즐게임
@@ -125,7 +125,7 @@ FlipedBitmapId 클래스에서 mipmapResId 대신 rawgid를 사용하도록 수�
 5. ui(30%)
 
 깃허브 커밋 자료
-
+![Image](https://github.com/user-attachments/assets/81d2b371-20fb-4865-8eea-b2affaa491e1)
 | 주차 | 커밋 수 |
 |:----|:------|
 | 1 | 8 |
