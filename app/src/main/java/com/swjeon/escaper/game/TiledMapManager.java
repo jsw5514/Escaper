@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.swjeon.escaper.R;
-import com.swjeon.escaper.util.TileBitmapPool;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +22,6 @@ public class TiledMapManager {
     private ArrayList<TiledMap> maps;
     TiledMapManager(Context appContext, int tilesetResId){
         this.context = appContext;
-        TileBitmapPool.setTileSetId(tilesetResId);
         loadMaps();
     }
     private void loadMaps() {

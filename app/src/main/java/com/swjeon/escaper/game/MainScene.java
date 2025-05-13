@@ -3,7 +3,6 @@ package com.swjeon.escaper.game;
 import android.content.Context;
 
 import com.swjeon.escaper.R;
-import com.swjeon.escaper.util.TileBitmapPool;
 
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;
 
