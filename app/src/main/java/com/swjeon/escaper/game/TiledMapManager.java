@@ -44,7 +44,7 @@ public class TiledMapManager {
         }
         catch (IOException e){
             Log.e(TAG,"error while loading json");
-            return;
+            throw new RuntimeException("error while loading json");
         }
 
         //json 문자열을 객체화
@@ -54,7 +54,7 @@ public class TiledMapManager {
                 mapDatas.add(new JSONObject(rawMapData));
             } catch (JSONException e) {
                 Log.e(TAG,"error while parsing json string");
-                return;
+                throw new RuntimeException("error while parsing json string");
             }
         }
 
@@ -70,7 +70,7 @@ public class TiledMapManager {
                 maps.add(new TiledMap(map));
             } catch (JSONException e) {
                 Log.e(TAG,"error while converting json to integer");
-                return;
+                throw new RuntimeException("error while converting json to integer");
             }
         }
     }
