@@ -41,16 +41,16 @@ public class TiledMap implements IGameObject {
     private void drawTileAt(Canvas canvas, int rawGid, float x, float y) {
         //gid 내 플래그 제거
         int gid = rawGid & ~(FLIPPED_H | FLIPPED_V | FLIPPED_D);
-        // 2) 0-based 인덱스로
+        //0-based 인덱스로 변경
         int tileIndex = gid - FIRST_GID;
         if (tileIndex < 0) return;  // 빈 공간, or 객체 레이어일 때 예외 처리
 
-        // 3) src 계산
+        //src Rect 계산
         int srcX = (tileIndex % TILE_SET_COLUMNS) * TILE_WIDTH;
         int srcY = (tileIndex / TILE_SET_COLUMNS) * TILE_HEIGHT;
         Rect src = new Rect(srcX, srcY, srcX + TILE_WIDTH, srcY + TILE_HEIGHT);
 
-        // 4) dst 계산 (예: 셀 크기 == 타일 크기)
+        //dst Rect 계산
         RectF dst = new RectF(x, y, x + 100, y + 100);
 
         canvas.drawBitmap(tileSet, src, dst, null);

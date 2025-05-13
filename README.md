@@ -170,13 +170,9 @@ MainScene에 등장하는 game object에 대하여<br>
 
 #### Todo List ####
 TildeMap.java<br>
-타일셋 메타데이터가 하드코딩되고 있음<br>
-타일맵 정상적으로 로딩하도록 수정<br>
+하드코딩된 타일셋 메타데이터를 json 파일에서 불러오도록 수정(TileSet 객체로 만들어서 TiledMapManager가 관리)<br>
+타일맵에서 뒤집힌 타일을 정상적으로 로딩하도록 수정<br>
 drawTileAt에서 Rect 객체를 반복생성하지 않도록 최적화 필요<br>
-타일을 매번 로드하지 않게 오브젝트 풀링 적용<br>
-<br>
-TileBitmapPool.java<br>
-FlipedBitmapId 클래스에서 mipmapResId 대신 rawgid를 사용하도록 수정<br>
 
 
 
