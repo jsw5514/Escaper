@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.swjeon.escaper"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -37,6 +37,8 @@ android {
 }
 
 dependencies {
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.9.0")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0")
     implementation(project(":a2dg"))
     implementation(libs.appcompat)
     implementation(libs.material)
