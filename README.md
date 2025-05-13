@@ -173,6 +173,10 @@ TildeMap.java<br>
 하드코딩된 타일셋 메타데이터를 json 파일에서 불러오도록 수정(TileSet 객체로 만들어서 TiledMapManager가 관리)<br>
 타일맵에서 뒤집힌 타일을 정상적으로 로딩하도록 수정<br>
 drawTileAt에서 Rect 객체를 반복생성하지 않도록 최적화 필요<br>
-
-
+<br>
+TiledMapManager.java<br>
+생성자에서 넘겨받는 tilesetResId를 이용해 TileSet 객체를 생성 및 초기화(필요시 타일셋 파일명도 생성자 인자로 추가)<br>
+<br>
+TileSet.java<br>
+타일셋 파일에서 읽어온 타일셋 데이터 클래스(DTO)<br>
 
