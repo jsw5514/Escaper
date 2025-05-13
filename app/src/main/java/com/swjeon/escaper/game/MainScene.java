@@ -2,6 +2,9 @@ package com.swjeon.escaper.game;
 
 import android.content.Context;
 
+import com.swjeon.escaper.R;
+import com.swjeon.escaper.util.TileBitmapPool;
+
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;
 
 public class MainScene extends Scene {
@@ -15,7 +18,7 @@ public class MainScene extends Scene {
         initLayers(Layer.COUNT);
 
         this.context=context;
-        this.mapManager = new TiledMapManager(context);
+        this.mapManager = new TiledMapManager(context,R.mipmap.tileset);
 
         add(Layer.map, mapManager.getMap(0));
     }
