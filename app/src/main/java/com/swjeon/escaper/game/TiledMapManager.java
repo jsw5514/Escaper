@@ -20,10 +20,43 @@ public class TiledMapManager {
     private final Context context;
     private final static int[] MAP_IDS = new int[]{R.raw.maze_1,R.raw.maze_2,R.raw.maze_3};
     private ArrayList<TiledMap> maps;
-    TiledMapManager(Context appContext, int tilesetResId){
+    private TileSet tileSet;
+    TiledMapManager(Context appContext, int tileSetImgId, int tileSetJsonId){
         this.context = appContext;
+        loadTileSet(tileSetImgId, tileSetJsonId);
         loadMaps();
     }
+
+    private void loadTileSet(int tileSetImgId, int tileSetJsonId) {
+        //json 파일을 문자열로 로드
+        String rawTileSetData;
+        try{
+            InputStream inputStream = context.getResources().openRawResource(tileSetJsonId);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder jsonData = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonData.append(line);
+            }
+            reader.close();
+            inputStream.close();
+            rawTileSetData = jsonData.toString();
+        }
+        catch (IOException e){
+            Log.e(TAG,"error while loading tileset json");
+            throw new RuntimeException(e);
+        }
+
+        //json 문자열을 객체화
+        try {
+            tileSet = Converter.fromJsonString(rawTileSetData);
+            tileSet.setImageAndroidId(tileSetImgId);
+        } catch (IOException e) {
+            Log.e(TAG, "error while converting tileset json to object");
+            throw new RuntimeException(e);
+        }
+    }
+
     private void loadMaps() {
         //json 파일을 문자열로 로드
         ArrayList<String> rawMapDatas;
@@ -44,7 +77,7 @@ public class TiledMapManager {
         }
         catch (IOException e){
             Log.e(TAG,"error while loading json");
-            throw new RuntimeException("error while loading json");
+            throw new RuntimeException(e);
         }
 
         //json 문자열을 객체화
@@ -54,7 +87,7 @@ public class TiledMapManager {
                 mapDatas.add(new JSONObject(rawMapData));
             } catch (JSONException e) {
                 Log.e(TAG,"error while parsing json string");
-                throw new RuntimeException("error while parsing json string");
+                throw new RuntimeException(e);
             }
         }
 
@@ -67,10 +100,10 @@ public class TiledMapManager {
                 for(int i = 0; i < map.length; i++){
                     map[i] = jsonMap.getInt(i);
                 }
-                maps.add(new TiledMap(map));
+                maps.add(new TiledMap(map, tileSet));
             } catch (JSONException e) {
                 Log.e(TAG,"error while converting json to integer");
-                throw new RuntimeException("error while converting json to integer");
+                throw new RuntimeException(e);
             }
         }
     }

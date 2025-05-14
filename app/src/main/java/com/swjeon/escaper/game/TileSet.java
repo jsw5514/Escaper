@@ -3,6 +3,7 @@ package com.swjeon.escaper.game;
 import com.fasterxml.jackson.annotation.*;
 
 public class TileSet {
+    private int imageAndroidId; //임의 추가한 필드(타일셋 이미지의 id 저장)
     private long columns;
     private String image;
     private long imageheight;
@@ -81,4 +82,12 @@ public class TileSet {
     public String getVersion() { return version; }
     @JsonProperty("version")
     public void setVersion(String value) { this.version = value; }
+
+    public int getImageAndroidId() {
+        return imageAndroidId;
+    }
+
+    public void setImageAndroidId(int imageAndroidId) {
+        this.imageAndroidId = imageAndroidId;
+    }
 }

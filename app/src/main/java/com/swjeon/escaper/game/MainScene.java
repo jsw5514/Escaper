@@ -17,7 +17,7 @@ public class MainScene extends Scene {
         initLayers(Layer.COUNT);
 
         this.context=context;
-        this.mapManager = new TiledMapManager(context,R.mipmap.tileset);
+        this.mapManager = new TiledMapManager(context, R.mipmap.tileset, R.raw.free_tile_set);
 
         add(Layer.map, mapManager.getMap(0));
     }

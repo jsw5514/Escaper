@@ -1,0 +1,14 @@
+{ "columns":32,
+ "image":"Free Dungeon - Fantasy Dreamland\/Free Dungeon - Fantasy Dreamland\/32x32\/FD_Dungeon_Free.png",
+ "imageheight":768,
+ "imagewidth":1024,
+ "margin":0,
+ "name":"free tile set",
+ "spacing":0,
+ "tilecount":768,
+ "tiledversion":"1.11.2",
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset",
+ "version":"1.10"
+}
