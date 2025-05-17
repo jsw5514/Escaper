@@ -169,10 +169,6 @@ MainScene에 등장하는 game object에 대하여<br>
 <br>
 
 #### Todo List ####
-TildeMap.java<br>
-타일맵에서 뒤집힌 타일을 정상적으로 로딩하도록 수정(현재는 플래그만 제거하여 뒤집힌 타일을 뒤집히지 않은 상태로 출력)<br>
-drawTileAt에서 Rect 객체를 반복생성하지 않도록 최적화 필요<br>
-<br>
 TiledMapManager.java<br>
 생성자에서 넘겨받는 tilesetResId를 이용해 TileSet 객체를 생성 및 초기화(필요시 타일셋 파일명도 생성자 인자로 추가)<br>
 
