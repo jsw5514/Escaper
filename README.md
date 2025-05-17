@@ -169,4 +169,9 @@ MainScene에 등장하는 game object에 대하여<br>
 <br>
 
 #### Todo List ####
+미구현 클래스 목록
+Player
+Enemy
+Item
+CollisionChecker
 
