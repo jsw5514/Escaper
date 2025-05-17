@@ -169,6 +169,4 @@ MainScene에 등장하는 game object에 대하여<br>
 <br>
 
 #### Todo List ####
-TiledMapManager.java<br>
-생성자에서 넘겨받는 tilesetResId를 이용해 TileSet 객체를 생성 및 초기화(필요시 타일셋 파일명도 생성자 인자로 추가)<br>
 
