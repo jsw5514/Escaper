@@ -15,7 +15,7 @@ public class MainScene extends Scene {
     private final float MAP_TILE_WIDTH = 100f;
     private int stage = 0;
     public enum Layer{
-         map, player;
+         map, enemy, player;
         public static final int COUNT = values().length;
     }
     public MainScene(Context context){
@@ -27,6 +27,8 @@ public class MainScene extends Scene {
 
         player = new Player(1,19, MAP_TILE_WIDTH);
         add(Layer.player, player);
+
+        add(Layer.enemy, new Enemy(19, 1, MAP_TILE_WIDTH));
     }
 
     @Override
