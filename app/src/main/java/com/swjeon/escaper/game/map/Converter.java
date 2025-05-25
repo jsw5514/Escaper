@@ -6,21 +6,20 @@
 //
 // Import this package:
 //
-//     import com.swjeon.escaper.game.Converter;
+//     import com.swjeon.escaper.game.map.Converter;
 //
 // Then you can deserialize a JSON string with
 //
 //     TileSet data = Converter.fromJsonString(jsonString);
 
-package com.swjeon.escaper.game;
+package com.swjeon.escaper.game.map;
 
 import java.io.IOException;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import java.util.*;
-import java.time.LocalDate;
+
 import java.time.OffsetDateTime;
 import java.time.OffsetTime;
 import java.time.ZoneOffset;

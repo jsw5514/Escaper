@@ -1,4 +1,4 @@
-package com.swjeon.escaper.game;
+package com.swjeon.escaper.game.map;
 
 import com.fasterxml.jackson.annotation.*;
 

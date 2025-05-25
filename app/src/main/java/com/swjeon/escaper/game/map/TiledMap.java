@@ -1,4 +1,4 @@
-package com.swjeon.escaper.game;
+package com.swjeon.escaper.game.map;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

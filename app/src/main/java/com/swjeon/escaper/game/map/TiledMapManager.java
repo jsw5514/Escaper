@@ -1,4 +1,4 @@
-package com.swjeon.escaper.game;
+package com.swjeon.escaper.game.map;
 
 import android.content.Context;
 import android.util.Log;
@@ -22,7 +22,7 @@ public class TiledMapManager {
     private ArrayList<TiledMap> maps;
     private final float MAP_TILE_WIDTH; //화면에서 타일 하나의 가로, 세로 길이
     private TileSet tileSet;
-    TiledMapManager(Context appContext, int tileSetImgId, int tileSetJsonId, float mapTileWidth){
+    public TiledMapManager(Context appContext, int tileSetImgId, int tileSetJsonId, float mapTileWidth){
         this.context = appContext;
         this.MAP_TILE_WIDTH = mapTileWidth;
         loadTileSet(tileSetImgId, tileSetJsonId);

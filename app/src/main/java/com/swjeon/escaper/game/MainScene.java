@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.MotionEvent;
 
 import com.swjeon.escaper.R;
+import com.swjeon.escaper.game.map.TiledMapManager;
 
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;
 
