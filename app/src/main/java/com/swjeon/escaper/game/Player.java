@@ -13,6 +13,9 @@ public class Player extends Sprite {
         setPosition(x,y);
     }
     public void setPosition(int x, int y){
-        setPosition(x * TILE_WIDTH, y * TILE_WIDTH, PLAYER_WIDTH);
+        //왼쪽 위를 가리키는 좌표를 중심을 가리키는 좌표로 변환
+        float centerX = x + 0.5f;
+        float centerY = y + 0.5f;
+        setPosition(centerX * TILE_WIDTH, centerY * TILE_WIDTH, PLAYER_WIDTH, PLAYER_WIDTH); //정사각형 타일에 맞추므로 PLAYER_WIDTH = PLAYER_HEIGHT
     }
 }
