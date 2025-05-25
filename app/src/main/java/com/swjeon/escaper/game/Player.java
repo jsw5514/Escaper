@@ -1,5 +1,6 @@
 package com.swjeon.escaper.game;
 
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.swjeon.escaper.R;
@@ -7,6 +8,7 @@ import com.swjeon.escaper.R;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.objects.Sprite;
 
 public class Player extends Sprite {
+    private final String TAG = getClass().getSimpleName();
     private final float TILE_WIDTH; //타일 1개의 가로,세로 길이
     private final float PLAYER_WIDTH = 100f;
     private int tiledX,tiledY;
@@ -42,24 +44,24 @@ public class Player extends Sprite {
             case MotionEvent.ACTION_MOVE:
                 return true;
             case MotionEvent.ACTION_UP:
-                float verticalMove = event.getX() - startX;
-                float horizontalMove = event.getY() - startY;
+                float horizontalMove = event.getX() - startX;
+                float verticalMove= event.getY() - startY;
                 if(Math.abs(verticalMove) > Math.abs(horizontalMove)){
                     //vertical move
                     if(verticalMove >= 0){
-                        move(MoveDirection.right);
+                        move(MoveDirection.down);
                     }
                     else{
-                        move(MoveDirection.left);
+                        move(MoveDirection.up);
                     }
                 }
                 else{
                     //horizontal move
                     if(horizontalMove >= 0){
-                        move(MoveDirection.down);
+                        move(MoveDirection.right);
                     }
                     else{
-                        move(MoveDirection.up);
+                        move(MoveDirection.left);
                     }
                 }
                 return true;
@@ -69,6 +71,22 @@ public class Player extends Sprite {
     }
 
     private void move(MoveDirection moveDirection) {
-        //TODO 플레이어 이동 코드 구현
+        Log.d(TAG,"Move to " + moveDirection);
+        switch (moveDirection){
+            case up:
+                setTiledPosition(tiledX, tiledY - 1);
+                break;
+            case down:
+                setTiledPosition(tiledX, tiledY + 1);
+                break;
+            case left:
+                setTiledPosition(tiledX - 1, tiledY);
+                break;
+            case right:
+                setTiledPosition(tiledX + 1, tiledY);
+                break;
+            default:
+                throw new RuntimeException("invalid move direction");
+        }
     }
 }

@@ -170,8 +170,10 @@ MainScene에 등장하는 game object에 대하여<br>
 
 #### Todo List ####
 미구현 클래스 목록
-Player
 Enemy
 Item
 CollisionChecker
+
+Player.java
+움직일때 충돌이 발생하면 이동이 취소되어야 함
 
