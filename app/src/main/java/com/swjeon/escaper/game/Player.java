@@ -3,6 +3,7 @@ package com.swjeon.escaper.game;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.swjeon.escaper.R;
 import com.swjeon.escaper.game.util.TiledSprite;
 
 public class Player extends TiledSprite {
@@ -11,7 +12,7 @@ public class Player extends TiledSprite {
     float startY;
 
     public Player(int x, int y, float tileWidth) {
-        super(x, y, tileWidth);
+        super(R.mipmap.player, x, y, tileWidth);
         SPRITE_WIDTH = 100f;
     }
 
