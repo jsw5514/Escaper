@@ -12,7 +12,7 @@ public class MainScene extends Scene {
     private final float MAP_TILE_WIDTH = 100f;
     private int stage = 0;
     public enum Layer{
-        map;
+         map, player;
         public static final int COUNT = values().length;
     }
     public MainScene(Context context){
@@ -21,5 +21,8 @@ public class MainScene extends Scene {
         this.context=context;
         this.mapManager = new TiledMapManager(context, R.mipmap.tileset, R.raw.free_tile_set, MAP_TILE_WIDTH);
         add(Layer.map, mapManager.getMap(stage));
+
+        Player player = new Player(1,19, MAP_TILE_WIDTH);
+        add(Layer.player, player);
     }
 }
