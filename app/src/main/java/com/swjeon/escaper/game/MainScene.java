@@ -9,6 +9,8 @@ import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;
 public class MainScene extends Scene {
     TiledMapManager mapManager;
     Context context;
+    private final float MAP_TILE_WIDTH = 100f;
+    private int stage = 0;
     public enum Layer{
         map;
         public static final int COUNT = values().length;
@@ -17,8 +19,7 @@ public class MainScene extends Scene {
         initLayers(Layer.COUNT);
 
         this.context=context;
-        this.mapManager = new TiledMapManager(context, R.mipmap.tileset, R.raw.free_tile_set);
-
-        add(Layer.map, mapManager.getMap(0));
+        this.mapManager = new TiledMapManager(context, R.mipmap.tileset, R.raw.free_tile_set, MAP_TILE_WIDTH);
+        add(Layer.map, mapManager.getMap(stage));
     }
 }

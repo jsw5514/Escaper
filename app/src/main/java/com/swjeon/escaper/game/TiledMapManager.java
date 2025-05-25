@@ -18,11 +18,13 @@ import java.util.ArrayList;
 public class TiledMapManager {
     private final String TAG = this.getClass().getSimpleName();
     private final Context context;
-    private final static int[] MAP_IDS = new int[]{R.raw.maze_1,R.raw.maze_2,R.raw.maze_3};
+    private final static int[] MAP_IDS = new int[]{R.raw.maze_1,R.raw.maze_2,R.raw.maze_3}; //맵 json 파일 리소스 번호
     private ArrayList<TiledMap> maps;
+    private final float MAP_TILE_WIDTH; //화면에서 타일 하나의 가로, 세로 길이
     private TileSet tileSet;
-    TiledMapManager(Context appContext, int tileSetImgId, int tileSetJsonId){
+    TiledMapManager(Context appContext, int tileSetImgId, int tileSetJsonId, float mapTileWidth){
         this.context = appContext;
+        this.MAP_TILE_WIDTH = mapTileWidth;
         loadTileSet(tileSetImgId, tileSetJsonId);
         loadMaps();
     }
@@ -99,11 +101,12 @@ public class TiledMapManager {
                 int firstGid = jsonMapData.getJSONArray("tilesets").getJSONObject(0).getInt("firstgid");
                 int mapWidth = jsonMapData.getJSONArray("layers").getJSONObject(0).getInt("width");
                 int mapHeight = jsonMapData.getJSONArray("layers").getJSONObject(0).getInt("height");
+                TiledMap.MapSize mapSize = new TiledMap.MapSize(mapWidth, mapHeight);
                 int[] mapData = new int[jsonMap.length()];
                 for(int i = 0; i < mapData.length; i++){
                     mapData[i] = jsonMap.getInt(i);
                 }
-                maps.add(new TiledMap(mapData, tileSet, firstGid, mapWidth, mapHeight));
+                maps.add(new TiledMap(mapData, tileSet, mapSize, MAP_TILE_WIDTH, firstGid));
             } catch (JSONException e) {
                 Log.e(TAG,"error while converting json to integer");
                 throw new RuntimeException(e);

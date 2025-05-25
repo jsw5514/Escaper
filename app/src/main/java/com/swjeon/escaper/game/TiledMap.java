@@ -11,13 +11,20 @@ import kr.ac.tukorea.ge.spgp2025.a2dg.framework.res.BitmapPool;
 public class TiledMap implements IGameObject {
     //tile set
     private final Bitmap tileSetImg;
-    private TileSet tileSet;
+    private final TileSet tileSet;
 
     //map data
-    private int mapWidth = 21; //가로 타일 갯수
-    private int mapHeight = 21; //세로 타일 갯수
-    private final int MAP_TILE_WIDTH = 100; //화면에서의 타일 길이(타일은 정사각형으로 가로 세로 길이는 동일하다고 간주)
-    private int[] tileDatas;
+    public static class MapSize{
+        public int width;
+        public int height;
+        public MapSize(int width, int height){
+            this.width = width;
+            this.height = height;
+        }
+    }
+    private final MapSize mapSize; //가로, 세로 타일 갯수
+    private final int[] tileDatas; //타일 배치 정보
+    private final float mapTileWidth; //화면에서의 타일 하나 길이(타일은 정사각형으로 가로 세로 길이는 동일하다고 간주)
 
     //데이터 해석을 위한 정보
     private final int firstGid; //타일셋의 global id 시작값(1개의 타일셋만 사용한다는 가정 하에 기본값은 1)
@@ -29,22 +36,16 @@ public class TiledMap implements IGameObject {
     //for draw
     Rect srcRect = new Rect();
     RectF dstRect = new RectF();
-    public TiledMap(int[] tileDatas, TileSet tileSet){
-        this(tileDatas, tileSet, 1); //명시적인 지정이 없으면 gid 시작을 기본값인 1로 사용
+    public TiledMap(int[] tileDatas, TileSet tileSet, MapSize mapSize, float mapTileWidth){
+        this(tileDatas, tileSet, mapSize, mapTileWidth, 1);
     }
-    public TiledMap(int[] tileDatas, TileSet tileSet, int firstGid){
+    public TiledMap(int[] tileDatas, TileSet tileSet, MapSize mapSize, float mapTileWidth, int firstGid){
         this.tileDatas = tileDatas;
         this.tileSetImg = BitmapPool.get(tileSet.getImageAndroidId());
         this.tileSet = tileSet;
+        this.mapSize = mapSize;
+        this.mapTileWidth = mapTileWidth;
         this.firstGid = firstGid;
-    }
-    public TiledMap(int[] tileDatas, TileSet tileSet, int firstGid, int mapWidth, int mapHeight){
-        this.tileDatas = tileDatas;
-        this.tileSetImg = BitmapPool.get(tileSet.getImageAndroidId());
-        this.tileSet = tileSet;
-        this.firstGid = firstGid;
-        this.mapWidth = mapWidth;
-        this.mapHeight = mapHeight;
     }
 
     @Override
@@ -54,8 +55,8 @@ public class TiledMap implements IGameObject {
     @Override
     public void draw(Canvas canvas) {
         for(int i = 0; i < tileDatas.length; i++){
-            float x = i % mapWidth * MAP_TILE_WIDTH;
-            float y = i / mapHeight * MAP_TILE_WIDTH;
+            float x = i % mapSize.width * mapTileWidth;
+            float y = i / mapSize.height * mapTileWidth;
             drawTileAt(canvas, tileDatas[i], x, y);
         }
     }
@@ -81,14 +82,14 @@ public class TiledMap implements IGameObject {
 
         //flip 플래그 적용하여 dst Rect 계산
         canvas.save();
-        canvas.translate(x + MAP_TILE_WIDTH / 2f, y + MAP_TILE_WIDTH / 2f); //그려야 하는 타일의 중심으로 원점 이동
+        canvas.translate(x + mapTileWidth / 2f, y + mapTileWidth / 2f); //그려야 하는 타일의 중심으로 원점 이동
         if(isFlippedD){ //대각선 뒤집기 처리
             canvas.rotate(90);
         }
         float sx = isFlippedH ? -1f : 1f; //세로 뒤집기 처리
         float sy = isFlippedV ? -1f : 1f; //가로 뒤집기 처리
         canvas.scale(sx, sy);
-        dstRect.set(-MAP_TILE_WIDTH/2f, -MAP_TILE_WIDTH/2f, MAP_TILE_WIDTH/2f, MAP_TILE_WIDTH/2f); //현재 타일의 정중앙에 있으므로 왼쪽 위부터 그려야한다.
+        dstRect.set(-mapTileWidth /2f, -mapTileWidth /2f, mapTileWidth /2f, mapTileWidth /2f); //현재 타일의 정중앙에 있으므로 왼쪽 위부터 그려야한다.
         canvas.drawBitmap(tileSetImg, srcRect, dstRect, null);
         canvas.restore();
     }
