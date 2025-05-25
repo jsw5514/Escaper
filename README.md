@@ -170,12 +170,13 @@ MainScene에 등장하는 game object에 대하여<br>
 
 #### Todo List ####
 미구현 클래스 목록
-Enemy
 Item
 CollisionChecker
 
 Player.java
-움직일때 충돌이 발생하면 이동이 취소되어야 함
+이동시 벽 타일과 충돌이 발생하면 이동이 취소되어야 함(취소 트리거 자체는 CollisionChecker가 발동시키더라도 취소하는건 이 클래스여야 함)
+
+Enemy.java
+일정 구역을 순찰하도록 구현(맵 데이터에 순찰 구역 포함 예정)
 
 +타일 맵에 적, 플레이어, 아이템의 위치를 저장(오브젝트 레이어 사용)
-
