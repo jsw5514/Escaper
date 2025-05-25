@@ -14,8 +14,8 @@ public class TiledMap implements IGameObject {
     private TileSet tileSet;
 
     //map data
-    private final int MAP_WIDTH = 21; //가로 타일 갯수
-    private final int MAP_HEIGHT = 21; //세로 타일 갯수
+    private int mapWidth = 21; //가로 타일 갯수
+    private int mapHeight = 21; //세로 타일 갯수
     private final int MAP_TILE_WIDTH = 100; //화면에서의 타일 길이(타일은 정사각형으로 가로 세로 길이는 동일하다고 간주)
     private int[] tileDatas;
 
@@ -38,6 +38,14 @@ public class TiledMap implements IGameObject {
         this.tileSet = tileSet;
         this.firstGid = firstGid;
     }
+    public TiledMap(int[] tileDatas, TileSet tileSet, int firstGid, int mapWidth, int mapHeight){
+        this.tileDatas = tileDatas;
+        this.tileSetImg = BitmapPool.get(tileSet.getImageAndroidId());
+        this.tileSet = tileSet;
+        this.firstGid = firstGid;
+        this.mapWidth = mapWidth;
+        this.mapHeight = mapHeight;
+    }
 
     @Override
     public void update() {//update는 하지 않을 예정이므로 삭제
@@ -46,8 +54,8 @@ public class TiledMap implements IGameObject {
     @Override
     public void draw(Canvas canvas) {
         for(int i = 0; i < tileDatas.length; i++){
-            float x = i % MAP_WIDTH * MAP_TILE_WIDTH;
-            float y = i / MAP_HEIGHT * MAP_TILE_WIDTH;
+            float x = i % mapWidth * MAP_TILE_WIDTH;
+            float y = i / mapHeight * MAP_TILE_WIDTH;
             drawTileAt(canvas, tileDatas[i], x, y);
         }
     }

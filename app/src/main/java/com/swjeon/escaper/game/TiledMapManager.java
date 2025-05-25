@@ -81,26 +81,29 @@ public class TiledMapManager {
         }
 
         //json 문자열을 객체화
-        ArrayList<JSONObject> mapDatas = new ArrayList<>();
+        ArrayList<JSONObject> jsonMapDatas = new ArrayList<>();
         for(String rawMapData : rawMapDatas){
             try {
-                mapDatas.add(new JSONObject(rawMapData));
+                jsonMapDatas.add(new JSONObject(rawMapData));
             } catch (JSONException e) {
                 Log.e(TAG,"error while parsing json string");
                 throw new RuntimeException(e);
             }
         }
 
-        //가져온 json 객체에서 맵 데이터 추출(단일 레이어 맵을 가정)
+        //가져온 json 객체에서 맵 데이터 추출(단일 레이어, 단일 타일셋 맵을 가정)
         maps = new ArrayList<>();
-        for(JSONObject mapData :mapDatas){
+        for(JSONObject jsonMapData :jsonMapDatas){
             try {
-                JSONArray jsonMap = mapData.getJSONArray("layers").getJSONObject(0).getJSONArray("data");
-                int[] map = new int[jsonMap.length()];
-                for(int i = 0; i < map.length; i++){
-                    map[i] = jsonMap.getInt(i);
+                JSONArray jsonMap = jsonMapData.getJSONArray("layers").getJSONObject(0).getJSONArray("data");
+                int firstGid = jsonMapData.getJSONArray("tilesets").getJSONObject(0).getInt("firstgid");
+                int mapWidth = jsonMapData.getJSONArray("layers").getJSONObject(0).getInt("width");
+                int mapHeight = jsonMapData.getJSONArray("layers").getJSONObject(0).getInt("height");
+                int[] mapData = new int[jsonMap.length()];
+                for(int i = 0; i < mapData.length; i++){
+                    mapData[i] = jsonMap.getInt(i);
                 }
-                maps.add(new TiledMap(map, tileSet));
+                maps.add(new TiledMap(mapData, tileSet, firstGid, mapWidth, mapHeight));
             } catch (JSONException e) {
                 Log.e(TAG,"error while converting json to integer");
                 throw new RuntimeException(e);
