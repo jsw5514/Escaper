@@ -9,6 +9,7 @@
 .cxx
 local.properties
 gradle/*
+/app/build
 
 #exclude list
 !gradle/libs.versions.toml
