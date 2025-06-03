@@ -10,7 +10,7 @@ import com.swjeon.escaper.game.map.tileset.TileSet;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.interfaces.IGameObject;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.res.BitmapPool;
 
-public class TiledMapBg implements IGameObject {
+public class TiledMap implements IGameObject {
     //tile set
     private final Bitmap tileSetImg;
     private final TileSet tileSet;
@@ -38,10 +38,10 @@ public class TiledMapBg implements IGameObject {
     //for draw
     Rect srcRect = new Rect();
     RectF dstRect = new RectF();
-    public TiledMapBg(int[] tileDatas, TileSet tileSet, MapSize mapSize, float mapTileWidth){
+    public TiledMap(int[] tileDatas, TileSet tileSet, MapSize mapSize, float mapTileWidth){
         this(tileDatas, tileSet, mapSize, mapTileWidth, 1);
     }
-    public TiledMapBg(int[] tileDatas, TileSet tileSet, MapSize mapSize, float mapTileWidth, int firstGid){
+    public TiledMap(int[] tileDatas, TileSet tileSet, MapSize mapSize, float mapTileWidth, int firstGid){
         this.tileDatas = tileDatas;
         this.tileSetImg = BitmapPool.get(tileSet.getImageAndroidId());
         this.tileSet = tileSet;
