@@ -42,7 +42,7 @@
                 {
                  "height":0,
                  "id":18,
-                 "name":"2",
+                 "name":"1",
                  "polyline":[
                         {
                          "x":0,
@@ -66,7 +66,7 @@
                 {
                  "height":0,
                  "id":17,
-                 "name":"2",
+                 "name":"1",
                  "point":true,
                  "rotation":0,
                  "type":"enemy",
@@ -78,7 +78,7 @@
                 {
                  "height":0,
                  "id":20,
-                 "name":"1",
+                 "name":"0",
                  "polyline":[
                         {
                          "x":0,
@@ -110,7 +110,7 @@
                 {
                  "height":0,
                  "id":8,
-                 "name":"1",
+                 "name":"0",
                  "point":true,
                  "rotation":0,
                  "type":"enemy",

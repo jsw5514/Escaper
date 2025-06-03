@@ -119,46 +119,49 @@ public class TiledMapManager {
                 TiledMap map = new TiledMap(mapData, tileSet, mapSize, MAP_TILE_WIDTH, firstGid);
 
                 //load object layer
-                JSONArray jsonGObjects = layers.getJSONObject(1).getJSONArray("objects");
+                JSONArray objectLayer = layers.getJSONObject(1).getJSONArray("objects");
                 Point playerStart = new Point();
                 ArrayList<EnemySpawnInfo> enemySpawnInfos = new ArrayList<>();
-                for(int i = 0; i<jsonGObjects.length(); i++){
-                    JSONObject item = jsonGObjects.getJSONObject(i);
+                for(int i = 0; i<objectLayer.length(); i++){
+                    JSONObject mapObject = objectLayer.getJSONObject(i);
                     int enemyIndex;
-                    switch (item.getString("type")){
+                    switch (mapObject.getString("type")){
                         case "player":
-                            int x = item.getInt("x");
-                            int y = item.getInt("y");
+                            int x = mapObject.getInt("x");
+                            int y = mapObject.getInt("y");
                             playerStart.set(x,y);
+                            Log.d(TAG,"플레이어 위치 로딩 완료 " + x + ", " + y);
                             break;
                         case "enemy":
                             //ensure size of list
-                            enemyIndex = Integer.parseInt(item.getString("name"));
-                            while(enemySpawnInfos.size() < enemyIndex){
+                            enemyIndex = Integer.parseInt(mapObject.getString("name"));
+                            while(enemySpawnInfos.size() < enemyIndex + 1){
                                 enemySpawnInfos.add(new EnemySpawnInfo());
                             }
                             //parse enemy pos data
-                            int enemyX = item.getInt("x");
-                            int enemyY = item.getInt("y");
+                            int enemyX = mapObject.getInt("x");
+                            int enemyY = mapObject.getInt("y");
                             enemySpawnInfos.get(enemyIndex).startPosition = new Point(enemyX,enemyY);
+                            Log.d(TAG,"적 위치 로딩 완료 " + enemyX + ", " + enemyY);
                             break;
                         case "path":
                             //ensure size of list
-                            enemyIndex = Integer.parseInt(item.getString("name"));
-                            while(enemySpawnInfos.size() < enemyIndex){
+                            enemyIndex = Integer.parseInt(mapObject.getString("name"));
+                            while(enemySpawnInfos.size() < enemyIndex + 1){
                                 enemySpawnInfos.add(new EnemySpawnInfo());
                             }
                             //parse enemy patrol path data
                             Path patrolPath = new Path();
-                            int pathOffsetX = item.getInt("x");
-                            int pathOffsetY = item.getInt("y");
-                            JSONArray pathPoints = item.getJSONArray("polyline");
+                            int pathOffsetX = mapObject.getInt("x");
+                            int pathOffsetY = mapObject.getInt("y");
+                            JSONArray pathPoints = mapObject.getJSONArray("polyline");
                             for(int j=0; j<pathPoints.length(); j++){
                                 JSONObject pathPoint = pathPoints.getJSONObject(j);
                                 int pathPointX = pathPoint.getInt("x") + pathOffsetX;
                                 int pathPointY = pathPoint.getInt("y") + pathOffsetY;
                                 if(j==0) patrolPath.moveTo(pathPointX,pathPointY);
                                 else patrolPath.lineTo(pathPointX,pathPointY);
+                                Log.d(TAG,"적 순찰 경로 로딩 " + pathPointX + ", " + pathPointY);
                             }
                             enemySpawnInfos.get(enemyIndex).patrolPath = patrolPath;
                             break;
