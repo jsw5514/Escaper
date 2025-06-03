@@ -33,9 +33,112 @@
          "width":21,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"objects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"2",
+                 "polyline":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-128,
+                         "y":0
+                        }, 
+                        {
+                         "x":-128,
+                         "y":-192
+                        }],
+                 "rotation":0,
+                 "type":"path",
+                 "visible":true,
+                 "width":0,
+                 "x":608,
+                 "y":608
+                }, 
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"2",
+                 "point":true,
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":0,
+                 "x":608,
+                 "y":608
+                }, 
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"1",
+                 "polyline":[
+                        {
+                         "x":42.3172616856827,
+                         "y":113.831431726169
+                        }, 
+                        {
+                         "x":42.3172616856827,
+                         "y":49.8314317261686
+                        }, 
+                        {
+                         "x":-21.6827383143173,
+                         "y":49.8314317261686
+                        }, 
+                        {
+                         "x":-21.6827383143173,
+                         "y":-14.1685682738314
+                        }, 
+                        {
+                         "x":362.317261685683,
+                         "y":-14.1685682738314
+                        }],
+                 "rotation":0,
+                 "type":"path",
+                 "visible":true,
+                 "width":0,
+                 "x":245.682738314317,
+                 "y":46.1685682738314
+                }, 
+                {
+                 "height":0,
+                 "id":8,
+                 "name":"1",
+                 "point":true,
+                 "rotation":0,
+                 "type":"enemy",
+                 "visible":true,
+                 "width":0,
+                 "x":608,
+                 "y":32
+                }, 
+                {
+                 "height":0,
+                 "id":7,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"player",
+                 "visible":true,
+                 "width":0,
+                 "x":32,
+                 "y":608
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":1,
+ "nextlayerid":6,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -43,7 +146,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/..\/..\/..\/Downloads\/Free Dungeon - Fantasy Dreamland\/free tile set.tsx"
+         "source":"free_tile_set.tsj"
         }],
  "tilewidth":32,
  "type":"map",
