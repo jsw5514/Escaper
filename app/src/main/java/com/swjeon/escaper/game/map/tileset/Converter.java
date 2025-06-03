@@ -6,13 +6,13 @@
 //
 // Import this package:
 //
-//     import com.swjeon.escaper.game.map.Converter;
+//     import com.swjeon.escaper.game.map.tileset.Converter;
 //
 // Then you can deserialize a JSON string with
 //
 //     TileSet data = Converter.fromJsonString(jsonString);
 
-package com.swjeon.escaper.game.map;
+package com.swjeon.escaper.game.map.tileset;
 
 import java.io.IOException;
 import com.fasterxml.jackson.databind.*;

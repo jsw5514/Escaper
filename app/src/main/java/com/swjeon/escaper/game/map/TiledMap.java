@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
+import com.swjeon.escaper.game.map.tileset.TileSet;
+
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.interfaces.IGameObject;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.res.BitmapPool;
 

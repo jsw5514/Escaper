@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.swjeon.escaper.R;
+import com.swjeon.escaper.game.map.tileset.Converter;
+import com.swjeon.escaper.game.map.tileset.TileSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
