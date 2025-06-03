@@ -99,7 +99,11 @@ public class TiledMapManager {
         maps = new ArrayList<>();
         for(JSONObject jsonMapData :jsonMapDatas){
             try {
-                JSONArray jsonMap = jsonMapData.getJSONArray("layers").getJSONObject(0).getJSONArray("data");
+                //load layers
+                JSONArray layers = jsonMapData.getJSONArray("layers");
+
+                //load map layer
+                JSONArray jsonMap = layers.getJSONObject(0).getJSONArray("data");
                 int firstGid = jsonMapData.getJSONArray("tilesets").getJSONObject(0).getInt("firstgid");
                 int mapWidth = jsonMapData.getJSONArray("layers").getJSONObject(0).getInt("width");
                 int mapHeight = jsonMapData.getJSONArray("layers").getJSONObject(0).getInt("height");
@@ -109,8 +113,12 @@ public class TiledMapManager {
                     mapData[i] = jsonMap.getInt(i);
                 }
                 maps.add(new TiledMap(mapData, tileSet, mapSize, MAP_TILE_WIDTH, firstGid));
+
+                //load objects
+                JSONArray jsonGObjects = layers.getJSONObject(1).getJSONArray("objects");
+                //TODO create map data bundle
             } catch (JSONException e) {
-                Log.e(TAG,"error while converting json to integer");
+                Log.e(TAG,"error while converting json to map bundle");
                 throw new RuntimeException(e);
             }
         }
