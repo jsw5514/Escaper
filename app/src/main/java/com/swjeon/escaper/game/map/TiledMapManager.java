@@ -25,9 +25,7 @@ public class TiledMapManager {
     private final static int[] MAP_IDS = new int[]{R.raw.maze_1,R.raw.maze_2,R.raw.maze_3}; //맵 json 파일 리소스 번호
 
     //map datas
-    private ArrayList<TiledMap> maps = new ArrayList<>();
-    private ArrayList<Point> playerStarts = new ArrayList<>();
-    private ArrayList<ArrayList<EnemySpawnInfo>> enemyOffsets = new ArrayList<>();
+    private final ArrayList<MapDataBundle> mapDataBundles = new ArrayList<>();
     private final float MAP_TILE_WIDTH; //화면에서 타일 하나의 가로, 세로 길이
     private TileSet tileSet;
 
@@ -118,7 +116,7 @@ public class TiledMapManager {
                 for(int i = 0; i < mapData.length; i++){
                     mapData[i] = jsonMap.getInt(i);
                 }
-                maps.add(new TiledMap(mapData, tileSet, mapSize, MAP_TILE_WIDTH, firstGid));
+                TiledMap map = new TiledMap(mapData, tileSet, mapSize, MAP_TILE_WIDTH, firstGid);
 
                 //load object layer
                 JSONArray jsonGObjects = layers.getJSONObject(1).getJSONArray("objects");
@@ -135,7 +133,7 @@ public class TiledMapManager {
                             break;
                         case "enemy":
                             //ensure size of list
-                            enemyIndex = Integer.valueOf(item.getString("name"));
+                            enemyIndex = Integer.parseInt(item.getString("name"));
                             while(enemySpawnInfos.size() < enemyIndex){
                                 enemySpawnInfos.add(new EnemySpawnInfo());
                             }
@@ -143,9 +141,10 @@ public class TiledMapManager {
                             int enemyX = item.getInt("x");
                             int enemyY = item.getInt("y");
                             enemySpawnInfos.get(enemyIndex).startPosition = new Point(enemyX,enemyY);
+                            break;
                         case "path":
                             //ensure size of list
-                            enemyIndex = Integer.valueOf(item.getString("name"));
+                            enemyIndex = Integer.parseInt(item.getString("name"));
                             while(enemySpawnInfos.size() < enemyIndex){
                                 enemySpawnInfos.add(new EnemySpawnInfo());
                             }
@@ -162,12 +161,12 @@ public class TiledMapManager {
                                 else patrolPath.lineTo(pathPointX,pathPointY);
                             }
                             enemySpawnInfos.get(enemyIndex).patrolPath = patrolPath;
+                            break;
                     }
                 }
-                playerStarts.add(playerStart);
-                enemyOffsets.add(enemySpawnInfos);
 
-                //TODO create map data bundle
+                //add in map data bundle
+                mapDataBundles.add(new MapDataBundle(map, playerStart, enemySpawnInfos));
             } catch (JSONException e) {
                 Log.e(TAG,"error while converting json to map bundle");
                 throw new RuntimeException(e);
@@ -175,6 +174,6 @@ public class TiledMapManager {
         }
     }
     public TiledMap getMap(int mapIndex){
-        return maps.get(mapIndex);
+        return mapDataBundles.get(mapIndex).getMap();
     }
 }
