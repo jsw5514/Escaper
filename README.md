@@ -178,6 +178,3 @@ Player.java
 
 Enemy.java
 일정 구역을 순찰하도록 구현(맵 데이터에 순찰 구역 포함 예정)
-
-TiledMapManager.java
-오브젝트 레이어와 맵 레이어 정보를 모두 저장하는 클래스를 따로 둘지 고민해볼것
