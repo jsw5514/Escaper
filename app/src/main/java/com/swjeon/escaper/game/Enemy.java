@@ -83,6 +83,7 @@ public class Enemy extends TiledSprite implements IBoxCollidable {
     @Override
     public RectF getCollisionRect() {
         collisionRect.set(dstRect.left + 50, dstRect.top + 50, dstRect.right + 50, dstRect.bottom + 50);
+        collisionRect.inset(10f, 10f);
         return collisionRect;
     }
 }

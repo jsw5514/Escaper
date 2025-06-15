@@ -1,4 +1,4 @@
-package com.swjeon.escaper.game.map;
+package com.swjeon.escaper.game;
 
 import android.graphics.RectF;
 
@@ -8,6 +8,8 @@ import com.swjeon.escaper.game.util.TiledSprite;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.interfaces.IBoxCollidable;
 
 public class Item extends TiledSprite implements IBoxCollidable {
+    private RectF collisionRect;
+
     public enum Type{
         orange, yellow
     }
@@ -15,6 +17,8 @@ public class Item extends TiledSprite implements IBoxCollidable {
     public Item(Type type, int x, int y, float tileWidth) {
         super(getMipmapId(type), x, y, tileWidth);
         itemType = type;
+        collisionRect = new RectF(dstRect);
+        collisionRect.inset(10f, 10f);
     }
 
     private static int getMipmapId(Type type) {
@@ -41,6 +45,6 @@ public class Item extends TiledSprite implements IBoxCollidable {
 
     @Override
     public RectF getCollisionRect() {
-        return dstRect;
+        return collisionRect;
     }
 }

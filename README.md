@@ -169,8 +169,6 @@ MainScene에 등장하는 game object에 대하여<br>
 <br>
 
 #### Todo List ####
-현재 충돌 판정이 너무 커서 줄여야 함(현재 옆칸에 있어도 충돌됨)
-
 미구현 클래스 목록
 Score
 

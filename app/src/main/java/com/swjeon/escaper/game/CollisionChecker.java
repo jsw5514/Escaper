@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.util.Log;
 
-import com.swjeon.escaper.game.map.Item;
 import com.swjeon.escaper.game.map.TiledMap;
 import com.swjeon.escaper.game.util.OnStageClearListener;
 

@@ -7,14 +7,11 @@ import android.view.MotionEvent;
 
 import com.swjeon.escaper.R;
 import com.swjeon.escaper.game.map.EnemySpawnInfo;
-import com.swjeon.escaper.game.map.Item;
 import com.swjeon.escaper.game.map.TiledMapManager;
 import com.swjeon.escaper.game.util.OnStageClearListener;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import kr.ac.tukorea.ge.spgp2025.a2dg.framework.interfaces.IGameObject;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;
 
 public class MainScene extends Scene implements OnStageClearListener {
