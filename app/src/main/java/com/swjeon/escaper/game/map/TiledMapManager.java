@@ -127,8 +127,9 @@ public class TiledMapManager {
                     int enemyIndex;
                     switch (mapObject.getString("type")){
                         case "player":
-                            int x = mapObject.getInt("x");
-                            int y = mapObject.getInt("y");
+                            //타일 좌표계로 변환
+                            int x = mapObject.getInt("x") / (int) tileSet.getTilewidth();
+                            int y = mapObject.getInt("y") / (int) tileSet.getTilewidth();
                             playerStart.set(x,y);
                             Log.d(TAG,"플레이어 위치 로딩 완료 " + x + ", " + y);
                             break;
@@ -139,8 +140,9 @@ public class TiledMapManager {
                                 enemySpawnInfos.add(new EnemySpawnInfo());
                             }
                             //parse enemy pos data
-                            int enemyX = mapObject.getInt("x");
-                            int enemyY = mapObject.getInt("y");
+                            //타일 좌표계로 변환
+                            int enemyX = mapObject.getInt("x") / (int) tileSet.getTilewidth();
+                            int enemyY = mapObject.getInt("y") / (int) tileSet.getTilewidth();
                             enemySpawnInfos.get(enemyIndex).startPosition = new Point(enemyX,enemyY);
                             Log.d(TAG,"적 위치 로딩 완료 " + enemyX + ", " + enemyY);
                             break;
@@ -180,5 +182,5 @@ public class TiledMapManager {
         return mapDataBundles.get(mapIndex).getMap();
     }
     public Point getPlayerStart(int mapIndex) { return mapDataBundles.get(mapIndex).getPlayerStart(); }
-    public ArrayList<EnemySpawnInfo> getEnemyInfo(int mapIndex) { return mapDataBundles.get(mapIndex).getEnemySpawnInfos(); }
+    public ArrayList<EnemySpawnInfo> getEnemyInfos(int mapIndex) { return mapDataBundles.get(mapIndex).getEnemySpawnInfos(); }
 }

@@ -174,6 +174,7 @@ Item
 CollisionChecker
 
 Player.java
+update 구현하여 움직임이 뚝뚝 끊어지지 않게 처리
 이동시 벽 타일과 충돌이 발생하면 이동이 취소되어야 함(취소 트리거 자체는 CollisionChecker가 발동시키더라도 취소하는건 이 클래스여야 함)
 
 Enemy.java

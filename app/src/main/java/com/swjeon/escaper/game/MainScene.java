@@ -4,7 +4,10 @@ import android.content.Context;
 import android.view.MotionEvent;
 
 import com.swjeon.escaper.R;
+import com.swjeon.escaper.game.map.EnemySpawnInfo;
 import com.swjeon.escaper.game.map.TiledMapManager;
+
+import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;
 
@@ -35,7 +38,11 @@ public class MainScene extends Scene {
         }
         add(Layer.player, player);
 
-        add(Layer.enemy, new Enemy(19, 1, MAP_TILE_WIDTH));
+        ArrayList<EnemySpawnInfo> spawnInfos = mapManager.getEnemyInfos(stage);
+        for (EnemySpawnInfo spawnInfo:spawnInfos){
+            add(Layer.enemy, new Enemy(spawnInfo, MAP_TILE_WIDTH));
+        }
+
     }
 
     @Override
