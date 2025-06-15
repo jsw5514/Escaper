@@ -169,14 +169,10 @@ MainScene에 등장하는 game object에 대하여<br>
 <br>
 
 #### Todo List ####
+현재 충돌 판정이 너무 커서 줄여야 함(현재 옆칸에 있어도 충돌됨)
+
 미구현 클래스 목록
 Score
-
-Player.java
-이동시 벽 타일과 충돌이 발생하면 이동이 취소되어야 함(취소 트리거 자체는 CollisionChecker가 발동시키더라도 취소하는건 이 클래스여야 함)
-
-TiledMap.java
-solid tile과 exit 정보를 별도로 갖고 있어야 함
 
 Item.java
 맵 데이터에서 item 위치를 불러오도록 수정(현재 임의 위치 고정 생성중)

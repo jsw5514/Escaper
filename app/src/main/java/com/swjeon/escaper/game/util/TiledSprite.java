@@ -1,5 +1,7 @@
 package com.swjeon.escaper.game.util;
 
+import android.graphics.Point;
+
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.objects.Sprite;
 
 public class TiledSprite extends Sprite {
@@ -19,6 +21,9 @@ public class TiledSprite extends Sprite {
         float centerX = x + 0.5f;
         float centerY = y + 0.5f;
         setPosition(centerX * TILE_WIDTH, centerY * TILE_WIDTH, SPRITE_WIDTH, SPRITE_WIDTH); //정사각형 타일에 맞추므로 SPRITE_WIDTH = SPRITE_HEIGHT
+    }
+    public void setTiledPosition(Point playerStart) {
+        setTiledPosition(playerStart.x, playerStart.y);
     }
     public float[] getTiledPosition(){
         return new float[]{tiledX, tiledY};

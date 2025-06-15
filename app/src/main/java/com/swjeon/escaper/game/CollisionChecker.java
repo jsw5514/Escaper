@@ -1,9 +1,12 @@
 package com.swjeon.escaper.game;
 
 import android.graphics.Canvas;
+import android.graphics.Point;
 import android.util.Log;
 
 import com.swjeon.escaper.game.map.Item;
+import com.swjeon.escaper.game.map.TiledMap;
+import com.swjeon.escaper.game.util.OnStageClearListener;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,12 +17,18 @@ import kr.ac.tukorea.ge.spgp2025.a2dg.framework.util.CollisionHelper;
 public class CollisionChecker implements IGameObject {
     private final String TAG = this.getClass().getSimpleName();
     private final MainScene scene;
+    private OnStageClearListener listener;
     public CollisionChecker(MainScene mainScene) {
         scene = mainScene;
     }
 
+    public void setOnStageClearListener(OnStageClearListener onStageClearListener) {
+        listener = onStageClearListener;
+    }
+
     @Override
     public void update() {
+        Log.d(TAG,"충돌체크 중");
         Player player = scene.player;
 
         //플레이어 <-> 적 충돌체크
@@ -47,7 +56,15 @@ public class CollisionChecker implements IGameObject {
             }
         }
 
-        //TODO 플레이어 <-> 특정 타일 충돌체크
+        //플레이어 <-> 특정 타일 충돌체크
+        TiledMap map = (TiledMap) scene.objectsAt(MainScene.Layer.map).get(0);
+        Point target = player.getTarget();
+        if (map.isSolidTile(target.x, target.y)) {
+            player.onCollideSolidTile();
+        }
+        if (map.isClearTile(target.x, target.y)) {
+            listener.onStageClear();
+        }
     }
 
     @Override

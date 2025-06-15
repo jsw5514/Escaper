@@ -1,6 +1,7 @@
 package com.swjeon.escaper.game;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -12,9 +13,11 @@ import kr.ac.tukorea.ge.spgp2025.a2dg.framework.interfaces.IBoxCollidable;
 
 public class Player extends TiledSprite implements IBoxCollidable {
     private final String TAG = getClass().getSimpleName();
-    private float startX, startY;
-    private float targetX, targetY; //이동 목표
+    private int startX, startY;
+    private int targetX, targetY; //이동 목표
     private float speed = 0.1f;
+    private int beforeX;
+    private int beforeY;
 
     public Player(Point pos, float tileWidth) {
         this(pos.x, pos.y, tileWidth);
@@ -88,8 +91,10 @@ public class Player extends TiledSprite implements IBoxCollidable {
     }
 
     public void moveTiledPosition(float x, float y) {
-        targetX = x;
-        targetY = y;
+        beforeX = targetX;
+        beforeY = targetY;
+        targetX = (int) x;
+        targetY = (int) y;
     }
 
     @Override
@@ -118,8 +123,29 @@ public class Player extends TiledSprite implements IBoxCollidable {
         return dstRect;
     }
 
+    public Point getTarget(){
+        return new Point(targetX, targetY);
+    }
+
+    public void setStartPos(Point startPos) {
+        startX = startPos.x;
+        startY = startPos.y;
+    }
+
     public void onCollideEnemy(){
-        moveTiledPosition(startX, startY);
-        setTiledPosition(startX, startY);
+        setStaticTiledPosition(startX, startY);
+    }
+
+    public void setStaticTiledPosition(Point pos){
+        this.setStaticTiledPosition(pos.x, pos.y);
+    }
+    public void setStaticTiledPosition(int x, int y) {
+        moveTiledPosition(x, y);
+        setTiledPosition(x, y);
+    }
+
+    public void onCollideSolidTile(){
+        targetX = beforeX;
+        targetY = beforeY;
     }
 }

@@ -96,4 +96,13 @@ public class TiledMap implements IGameObject {
         canvas.restore();
     }
 
+    public boolean isSolidTile(int x, int y) {
+        int tileNum = tileDatas[x + y * mapSize.width];
+        return tileNum != 42 && tileNum != 728; //42는 일반 길 타일, 728은 출구 타일
+    }
+
+    public boolean isClearTile(int x, int y) {
+        int tileNum = tileDatas[x + y * mapSize.width];
+        return tileNum == 728;
+    }
 }
