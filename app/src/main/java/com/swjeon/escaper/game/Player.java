@@ -1,16 +1,20 @@
 package com.swjeon.escaper.game;
 
 import android.graphics.Point;
+import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import com.swjeon.escaper.R;
 import com.swjeon.escaper.game.util.TiledSprite;
 
-public class Player extends TiledSprite {
+import kr.ac.tukorea.ge.spgp2025.a2dg.framework.interfaces.IBoxCollidable;
+
+public class Player extends TiledSprite implements IBoxCollidable {
     private final String TAG = getClass().getSimpleName();
-    float targetX, targetY; //이동 목표
-    float speed = 0.1f;
+    private float startX, startY;
+    private float targetX, targetY; //이동 목표
+    private float speed = 0.1f;
 
     public Player(Point pos, float tileWidth) {
         this(pos.x, pos.y, tileWidth);
@@ -18,8 +22,8 @@ public class Player extends TiledSprite {
 
     public Player(int x, int y, float tileWidth) {
         super(R.mipmap.player, x, y, tileWidth);
-        targetX = x;
-        targetY = y;
+        startX = targetX = x;
+        startY = targetY = y;
         SPRITE_WIDTH = 100f;
     }
 
@@ -27,18 +31,18 @@ public class Player extends TiledSprite {
         up, down, left, right
     }
 
-    float startX, startY;
+    float touchStartX, touchStartY;
     public boolean onTouch(MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                startX = event.getX();
-                startY = event.getY();
+                touchStartX = event.getX();
+                touchStartY = event.getY();
                 return true;
             case MotionEvent.ACTION_MOVE:
                 return true;
             case MotionEvent.ACTION_UP:
-                float horizontalMove = event.getX() - startX;
-                float verticalMove= event.getY() - startY;
+                float horizontalMove = event.getX() - touchStartX;
+                float verticalMove= event.getY() - touchStartY;
                 if(Math.abs(verticalMove) > Math.abs(horizontalMove)){
                     //vertical move
                     if(verticalMove >= 0){
@@ -107,5 +111,15 @@ public class Player extends TiledSprite {
             if (tiledY < targetY) tiledY = targetY;
         }
         setTiledPosition(tiledX, tiledY);
+    }
+
+    @Override
+    public RectF getCollisionRect() {
+        return dstRect;
+    }
+
+    public void onCollideEnemy(){
+        moveTiledPosition(startX, startY);
+        setTiledPosition(startX, startY);
     }
 }

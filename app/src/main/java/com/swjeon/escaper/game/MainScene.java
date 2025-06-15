@@ -19,7 +19,7 @@ public class MainScene extends Scene {
     private final float MAP_TILE_WIDTH = 100f;
     private int stage;
     public enum Layer{
-         map, item, enemy, player;
+         map, item, enemy, player, controller;
         public static final int COUNT = values().length;
     }
     public MainScene(Context context){
@@ -32,6 +32,7 @@ public class MainScene extends Scene {
 
         setGObjPos();
         add(Layer.item, new Item(Item.Type.orange, 1, 1, MAP_TILE_WIDTH));
+        add(Layer.controller, new CollisionChecker(this));
     }
 
     private void setGObjPos() {

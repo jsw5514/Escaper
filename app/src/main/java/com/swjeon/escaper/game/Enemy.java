@@ -5,21 +5,24 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PathMeasure;
 import android.graphics.Point;
+import android.graphics.RectF;
 
 import com.swjeon.escaper.R;
 import com.swjeon.escaper.game.map.EnemySpawnInfo;
 import com.swjeon.escaper.game.util.TiledSprite;
 
+import kr.ac.tukorea.ge.spgp2025.a2dg.framework.interfaces.IBoxCollidable;
+import kr.ac.tukorea.ge.spgp2025.a2dg.framework.util.RectUtil;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.view.GameView;
 
-public class Enemy extends TiledSprite {
+public class Enemy extends TiledSprite implements IBoxCollidable {
     private final String TAG = this.getClass().getSimpleName();
     EnemySpawnInfo spawnInfo;
-    float speed = 500f;
-    float distance = 0f;
-    float[] pos = new float[2];
-    float[] tan = new float[2];
-    PathMeasure pm;
+    private float speed = 500f;
+    private float distance = 0f;
+    private float[] pos = new float[2];
+    private float[] tan = new float[2];
+    private PathMeasure pm;
     public Enemy (EnemySpawnInfo spawnInfo, float tileWidth){
         this(spawnInfo.startPosition.x, spawnInfo.startPosition.y, tileWidth);
         this.spawnInfo = spawnInfo;
@@ -74,5 +77,12 @@ public class Enemy extends TiledSprite {
             canvas.drawPath(spawnInfo.patrolPath, paint);
         }
         canvas.restore();
+    }
+
+    RectF collisionRect = new RectF();
+    @Override
+    public RectF getCollisionRect() {
+        collisionRect.set(dstRect.left + 50, dstRect.top + 50, dstRect.right + 50, dstRect.bottom + 50);
+        return collisionRect;
     }
 }

@@ -1,9 +1,13 @@
 package com.swjeon.escaper.game.map;
 
+import android.graphics.RectF;
+
 import com.swjeon.escaper.R;
 import com.swjeon.escaper.game.util.TiledSprite;
 
-public class Item extends TiledSprite {
+import kr.ac.tukorea.ge.spgp2025.a2dg.framework.interfaces.IBoxCollidable;
+
+public class Item extends TiledSprite implements IBoxCollidable {
     public enum Type{
         orange, yellow
     }
@@ -33,5 +37,10 @@ public class Item extends TiledSprite {
             return 100;
         else
             return 200;
+    }
+
+    @Override
+    public RectF getCollisionRect() {
+        return dstRect;
     }
 }
