@@ -159,8 +159,8 @@ public class TiledMapManager {
                             JSONArray pathPoints = mapObject.getJSONArray("polyline");
                             for(int j=0; j<pathPoints.length(); j++){
                                 JSONObject pathPoint = pathPoints.getJSONObject(j);
-                                int pathPointX = pathPoint.getInt("x") + pathOffsetX;
-                                int pathPointY = pathPoint.getInt("y") + pathOffsetY;
+                                float pathPointX = (pathPoint.getInt("x") + pathOffsetX) / (int) tileSet.getTilewidth() * MAP_TILE_WIDTH;
+                                float pathPointY = (pathPoint.getInt("y") + pathOffsetY) / (int) tileSet.getTilewidth() * MAP_TILE_WIDTH;
                                 if(j==0) patrolPath.moveTo(pathPointX,pathPointY);
                                 else patrolPath.lineTo(pathPointX,pathPointY);
                                 Log.d(TAG,"적 순찰 경로 로딩 " + pathPointX + ", " + pathPointY);

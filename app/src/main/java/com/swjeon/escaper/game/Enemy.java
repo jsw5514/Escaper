@@ -1,6 +1,8 @@
 package com.swjeon.escaper.game;
 
-import android.graphics.Path;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PathMeasure;
 import android.graphics.Point;
 
@@ -11,8 +13,9 @@ import com.swjeon.escaper.game.util.TiledSprite;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.view.GameView;
 
 public class Enemy extends TiledSprite {
+    private final String TAG = this.getClass().getSimpleName();
     EnemySpawnInfo spawnInfo;
-    float speed = 200f;
+    float speed = 500f;
     float distance = 0f;
     float[] pos = new float[2];
     float[] tan = new float[2];
@@ -32,13 +35,44 @@ public class Enemy extends TiledSprite {
         this.speed = speed;
     }
 
+    private boolean isForward = true;
     @Override
     public void update() {
         if (pm == null) return; // 순찰경로가 없는 경우 바로 리턴
-        distance += speed * GameView.frameTime;
-        distance = distance % (pm.getLength() * 2);
+        if (isForward) { //forward
+            distance += speed * GameView.frameTime;
+            if (distance > pm.getLength()) {
+                distance = pm.getLength();
+                isForward = false;
+            }
+        }
+        else { //backward
+            distance -= speed * GameView.frameTime;
+            if (distance < 0){
+                distance = 0;
+                isForward = true;
+            }
+        }
         pm.getPosTan(distance, pos, tan);
         setPosition(pos[0],pos[1]);
         super.update();
+    }
+
+    private static Paint paint;
+    static {
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(10f);
+        paint.setColor(Color.MAGENTA);
+    }
+    @Override
+    public void draw(Canvas canvas) {
+        canvas.save();
+        canvas.translate(SPRITE_WIDTH/2,SPRITE_WIDTH/2);
+        super.draw(canvas);
+        if(GameView.drawsDebugStuffs) {
+            canvas.drawPath(spawnInfo.patrolPath, paint);
+        }
+        canvas.restore();
     }
 }
