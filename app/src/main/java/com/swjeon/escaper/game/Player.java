@@ -9,8 +9,8 @@ import com.swjeon.escaper.game.util.TiledSprite;
 
 public class Player extends TiledSprite {
     private final String TAG = getClass().getSimpleName();
-    float startX;
-    float startY;
+    float targetX, targetY; //이동 목표
+    float speed = 0.1f;
 
     public Player(Point pos, float tileWidth) {
         this(pos.x, pos.y, tileWidth);
@@ -18,12 +18,16 @@ public class Player extends TiledSprite {
 
     public Player(int x, int y, float tileWidth) {
         super(R.mipmap.player, x, y, tileWidth);
+        targetX = x;
+        targetY = y;
         SPRITE_WIDTH = 100f;
     }
 
     enum MoveDirection{
         up, down, left, right
     }
+
+    float startX, startY;
     public boolean onTouch(MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
@@ -63,19 +67,45 @@ public class Player extends TiledSprite {
         Log.d(TAG,"Move to " + moveDirection);
         switch (moveDirection){
             case up:
-                setTiledPosition(tiledX, tiledY - 1);
+                moveTiledPosition(tiledX, tiledY - 1);
                 break;
             case down:
-                setTiledPosition(tiledX, tiledY + 1);
+                moveTiledPosition(tiledX, tiledY + 1);
                 break;
             case left:
-                setTiledPosition(tiledX - 1, tiledY);
+                moveTiledPosition(tiledX - 1, tiledY);
                 break;
             case right:
-                setTiledPosition(tiledX + 1, tiledY);
+                moveTiledPosition(tiledX + 1, tiledY);
                 break;
             default:
                 throw new RuntimeException("invalid move direction");
         }
+    }
+
+    public void moveTiledPosition(float x, float y) {
+        targetX = x;
+        targetY = y;
+    }
+
+    @Override
+    public void update() {
+        if (tiledX < targetX){
+            tiledX += speed;
+            if (tiledX > targetX) tiledX = targetX;
+        }
+        else if (tiledX > targetX){
+            tiledX -= speed;
+            if (tiledX < targetX) tiledX = targetX;
+        }
+        if (tiledY < targetY) {
+            tiledY += speed;
+            if (tiledY > targetY) tiledY = targetY;
+        }
+        else if (tiledY > targetY) {
+            tiledY -= speed;
+            if (tiledY < targetY) tiledY = targetY;
+        }
+        setTiledPosition(tiledX, tiledY);
     }
 }
