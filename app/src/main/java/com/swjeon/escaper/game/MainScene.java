@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 
 import com.swjeon.escaper.R;
 import com.swjeon.escaper.game.map.EnemySpawnInfo;
+import com.swjeon.escaper.game.map.Item;
 import com.swjeon.escaper.game.map.TiledMapManager;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class MainScene extends Scene {
     private final float MAP_TILE_WIDTH = 100f;
     private int stage;
     public enum Layer{
-         map, enemy, player;
+         map, item, enemy, player;
         public static final int COUNT = values().length;
     }
     public MainScene(Context context){
@@ -30,6 +31,7 @@ public class MainScene extends Scene {
         add(Layer.map, mapManager.getMap(stage));
 
         setGObjPos();
+        add(Layer.item, new Item(Item.Type.orange, 1, 1, MAP_TILE_WIDTH));
     }
 
     private void setGObjPos() {
@@ -42,7 +44,6 @@ public class MainScene extends Scene {
         for (EnemySpawnInfo spawnInfo:spawnInfos){
             add(Layer.enemy, new Enemy(spawnInfo, MAP_TILE_WIDTH));
         }
-
     }
 
     @Override

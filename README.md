@@ -170,7 +170,6 @@ MainScene에 등장하는 game object에 대하여<br>
 
 #### Todo List ####
 미구현 클래스 목록
-Item
 CollisionChecker
 
 Player.java
@@ -178,3 +177,6 @@ Player.java
 
 TiledMap.java
 solid tile과 exit 정보를 별도로 갖고 있어야 함
+
+Item.java
+맵 데이터에서 item 위치를 불러오도록 수정(현재 임의 위치 고정 생성중)
