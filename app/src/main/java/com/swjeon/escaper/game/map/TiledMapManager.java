@@ -179,4 +179,6 @@ public class TiledMapManager {
     public TiledMap getMap(int mapIndex){
         return mapDataBundles.get(mapIndex).getMap();
     }
+    public Point getPlayerStart(int mapIndex) { return mapDataBundles.get(mapIndex).getPlayerStart(); }
+    public ArrayList<EnemySpawnInfo> getEnemyInfo(int mapIndex) { return mapDataBundles.get(mapIndex).getEnemySpawnInfos(); }
 }

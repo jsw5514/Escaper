@@ -1,5 +1,6 @@
 package com.swjeon.escaper.game;
 
+import android.graphics.Point;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -10,6 +11,10 @@ public class Player extends TiledSprite {
     private final String TAG = getClass().getSimpleName();
     float startX;
     float startY;
+
+    public Player(Point pos, float tileWidth) {
+        this(pos.x, pos.y, tileWidth);
+    }
 
     public Player(int x, int y, float tileWidth) {
         super(R.mipmap.player, x, y, tileWidth);

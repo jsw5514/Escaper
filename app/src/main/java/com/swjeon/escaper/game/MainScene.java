@@ -13,19 +13,26 @@ public class MainScene extends Scene {
     Player player;
     Context context;
     private final float MAP_TILE_WIDTH = 100f;
-    private int stage = 0;
+    private int stage;
     public enum Layer{
          map, enemy, player;
         public static final int COUNT = values().length;
     }
     public MainScene(Context context){
         initLayers(Layer.COUNT);
+        stage = 0;
 
         this.context=context;
         this.mapManager = new TiledMapManager(context, R.mipmap.tileset, R.raw.free_tile_set, MAP_TILE_WIDTH);
         add(Layer.map, mapManager.getMap(stage));
 
-        player = new Player(1,19, MAP_TILE_WIDTH);
+        setGObjPos();
+    }
+
+    private void setGObjPos() {
+        if (player == null) {
+            player = new Player(mapManager.getPlayerStart(stage), MAP_TILE_WIDTH);
+        }
         add(Layer.player, player);
 
         add(Layer.enemy, new Enemy(19, 1, MAP_TILE_WIDTH));
