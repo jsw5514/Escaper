@@ -27,7 +27,7 @@ public class CollisionChecker implements IGameObject {
 
     @Override
     public void update() {
-        Log.d(TAG,"충돌체크 중");
+        //Log.d(TAG,"충돌체크 중");
         Player player = scene.player;
 
         //플레이어 <-> 적 충돌체크
@@ -39,6 +39,7 @@ public class CollisionChecker implements IGameObject {
             if (colidesE) {
                 Log.i(TAG, "플레이어와 적이 충돌함");
                 player.onCollideEnemy();
+                scene.score.setScore(0);
             }
         }
 
@@ -50,8 +51,8 @@ public class CollisionChecker implements IGameObject {
             boolean colidesI = CollisionHelper.collides(player, item);
             if (colidesI) {
                 Log.i(TAG, "플레이어와 아이템이 충돌함");
+                scene.score.add(item.getScore());
                 scene.remove(MainScene.Layer.item, item);
-                //TODO 점수 획득
             }
         }
 
