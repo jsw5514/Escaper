@@ -13,9 +13,12 @@
         android:theme="@style/Theme.Escaper"
         tools:targetApi="31">
         <activity
+            android:name=".app.LeaderBoardActivity"
+            android:exported="false" />
+        <activity
             android:name=".app.EscaperActivity"
-            android:exported="false"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
         <activity
             android:name=".app.MainActivity"
             android:exported="true">

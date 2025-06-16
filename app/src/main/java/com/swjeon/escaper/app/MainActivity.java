@@ -1,6 +1,7 @@
 package com.swjeon.escaper.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,8 +41,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //call leader board activity
-            Log.e(TAG,"LeaderBoardActivity is not yet implemented");
-            throw new RuntimeException("not yet implemented");
+//            SharedPreferences pref = getApplicationContext().getSharedPreferences("score list", MODE_PRIVATE);
+//            Log.d(TAG, "score: " + pref.getAll());
+            Intent leaderBoardActivityIntent = new Intent(v.getContext(), LeaderBoardActivity.class);
+            startActivity(leaderBoardActivityIntent);
         }
     };
     private final View.OnClickListener listenerLeave = new View.OnClickListener() {
