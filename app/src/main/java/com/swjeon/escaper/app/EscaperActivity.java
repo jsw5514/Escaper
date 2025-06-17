@@ -15,6 +15,6 @@ public class EscaperActivity extends GameActivity {
         GameView.drawsDebugStuffs = BuildConfig.DEBUG;
         Metrics.setGameSize(2100f,2100f);
         super.onCreate(savedInstanceState);
-        new MainScene(getApplicationContext()).push();
+        new MainScene(this).push();
     }
 }

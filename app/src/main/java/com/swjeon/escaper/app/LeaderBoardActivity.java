@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.swjeon.escaper.databinding.ActivityLeaderBoardBinding;
+import com.swjeon.escaper.game.util.DBManager;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -28,19 +29,8 @@ public class LeaderBoardActivity extends AppCompatActivity {
         binding = ActivityLeaderBoardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("score list", MODE_PRIVATE);
-        leaderboard = prefs.getAll().entrySet().stream()
-                // Map.Entry<String,Object> → Map.Entry<String,Integer> 캐스팅
-                .map(e -> new AbstractMap.SimpleEntry<>(
-                        e.getKey(),
-                        (Integer) e.getValue()
-                ))
-                // 점수 내림차순 정렬
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                // “유저이름: nnnn점” 문자열로 매핑
-                .map(e -> e.getKey() + " : " + e.getValue() + "점")
-                // ArrayList로 수집
-                .collect(Collectors.toCollection(ArrayList::new));
+        DBManager dbManager = DBManager.getInstance(this);
+        leaderboard = dbManager.getLeaderBoard();
 
         binding.leaderBoardList.setAdapter(adapter);
     }

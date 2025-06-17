@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import com.swjeon.escaper.R;
 import com.swjeon.escaper.game.map.EnemySpawnInfo;
 import com.swjeon.escaper.game.map.TiledMapManager;
+import com.swjeon.escaper.game.util.DBManager;
 import com.swjeon.escaper.game.util.OnStageClearListener;
 
 import java.time.LocalDateTime;
@@ -63,12 +64,10 @@ public class MainScene extends Scene implements OnStageClearListener {
             objectsAt(Layer.controller).clear();
             collisionChecker = null;
 
-            //최종 점수 SharedPreference에 기록
+            //최종 점수 db에 기록
             LocalDateTime now = LocalDateTime.now();
-            SharedPreferences pref = context.getSharedPreferences("score list", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putInt(now.toString(), score.getScore());
-            editor.apply();
+            DBManager dbManager = DBManager.getInstance(context);
+            dbManager.saveScore(now, score.getScore());
 
             pop();
             return;
