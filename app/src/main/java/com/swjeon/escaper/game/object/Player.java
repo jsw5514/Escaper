@@ -47,6 +47,7 @@ public class Player extends TiledSprite implements IBoxCollidable, ITouchable {
             case MotionEvent.ACTION_UP:
                 float horizontalMove = event.getX() - touchStartX;
                 float verticalMove= event.getY() - touchStartY;
+                if(Math.max(Math.abs(verticalMove),Math.abs(horizontalMove)) < 50f) return false;
                 if(Math.abs(verticalMove) > Math.abs(horizontalMove)){
                     //vertical move
                     if(verticalMove >= 0){

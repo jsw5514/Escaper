@@ -170,8 +170,6 @@ MainScene에 등장하는 game object에 대하여<br>
 
 #### Todo List ####
 미구현 클래스 목록
-PauseScene
-
 Item.java
 맵 데이터에서 item 위치를 불러오도록 수정(현재 임의 위치 고정 생성중)
 
