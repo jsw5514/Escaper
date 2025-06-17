@@ -18,6 +18,7 @@ import com.swjeon.escaper.game.util.OnStageClearListener;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import kr.ac.tukorea.ge.spgp2025.a2dg.framework.objects.Button;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.objects.Score;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.view.Metrics;
@@ -28,6 +29,7 @@ public class MainScene extends Scene implements OnStageClearListener {
     private Player player;
     private CollisionChecker collisionChecker;
     private Score score;
+    private Button pauseBt;
     private Context context;
     private final float MAP_TILE_WIDTH = 100f;
     private int stage;
@@ -54,6 +56,18 @@ public class MainScene extends Scene implements OnStageClearListener {
         score = new Score(R.mipmap.number_24x32, 1800f, 0f, 60f);
         score.setScore(0);
         add(Layer.ui, score);
+
+        pauseBt = new Button(R.mipmap.icon_pause_transparent, 150f, 200f, 400f, 400f, new Button.OnTouchListener() {
+            @Override
+            public boolean onTouch(boolean pressed) {
+                if (pressed) {
+                    new PauseScene().push();
+                    return true;
+                }
+                return false;
+            }
+        });
+        add(Layer.ui, pauseBt);
     }
 
     @Override
