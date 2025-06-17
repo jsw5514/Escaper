@@ -57,6 +57,7 @@ public class CollisionChecker implements IGameObject {
             }
         }
 
+        if (scene.passWall) return; //check debug god mode
         //플레이어 <-> 특정 타일 충돌체크
         TiledMap map = (TiledMap) scene.objectsAt(MainScene.Layer.map).get(0);
         Point target = player.getTarget();
@@ -64,6 +65,12 @@ public class CollisionChecker implements IGameObject {
             player.onCollideSolidTile();
         }
         if (map.isClearTile(target.x, target.y)) {
+            notifyStageClear();
+        }
+    }
+
+    private void notifyStageClear() {
+        if (listener != null) {
             listener.onStageClear();
         }
     }

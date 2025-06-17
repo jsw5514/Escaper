@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.objects.Score;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;
+import kr.ac.tukorea.ge.spgp2025.a2dg.framework.view.Metrics;
 
 public class MainScene extends Scene implements OnStageClearListener {
     private final String TAG = this.getClass().getSimpleName();
@@ -32,7 +33,7 @@ public class MainScene extends Scene implements OnStageClearListener {
     private int stage;
 
     public enum Layer{
-         map, item, enemy, player, score, controller;
+         map, item, enemy, player, ui, controller;
         public static final int COUNT = values().length;
     }
     public MainScene(Context context){
@@ -52,7 +53,7 @@ public class MainScene extends Scene implements OnStageClearListener {
 
         score = new Score(R.mipmap.number_24x32, 1800f, 0f, 60f);
         score.setScore(0);
-        add(Layer.score, score);
+        add(Layer.ui, score);
     }
 
     @Override
@@ -98,10 +99,38 @@ public class MainScene extends Scene implements OnStageClearListener {
         add(Layer.item, new Item(Item.Type.orange, 1, 1, MAP_TILE_WIDTH));
     }
 
+    public boolean passWall = false;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        //if (event.getAction() == MotionEvent.ACTION_DOWN) onStageClear(); //test code
-        return player.onTouch(event);
+        if (isEnableGodMode(event)) return true; //debug god mode
+        if (pauseBt.onTouchEvent(event)){
+            return true;
+        }
+        else {
+            return player.onTouch(event);
+        }
+    }
+
+    private boolean needConsumeEvent = false;
+    private boolean isEnableGodMode(MotionEvent event) {
+        //우하단 지점을 누를시 스테이지 클리어, 그 외 우측 아무 곳이나 누르면 벽 무시
+        float[] touchedPos = Metrics.fromScreen(event.getX(), event.getY());
+        if (event.getAction() == MotionEvent.ACTION_DOWN && touchedPos[0] > Metrics.width - 100f) {
+            if (touchedPos[1] > Metrics.height - 100f){
+                onStageClear();
+            }
+            else {
+                passWall = true;
+            }
+            needConsumeEvent = true;
+            return true;
+        } else if (needConsumeEvent) {
+            if(event.getAction() == MotionEvent.ACTION_UP) {
+                needConsumeEvent = false;
+            }
+            return true;
+        }
+        return false;
     }
 
     public void resetScore() {

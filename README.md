@@ -177,3 +177,6 @@ Item.java
 
 MainScene.java
 점수저장시 이름으로 저장하도록 수정 
+
+Player.java
+일정 이하의 작은 드래그에는 이동하지 않게 수정
