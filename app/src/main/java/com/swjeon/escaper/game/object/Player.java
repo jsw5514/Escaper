@@ -9,8 +9,9 @@ import com.swjeon.escaper.R;
 import com.swjeon.escaper.game.util.TiledSprite;
 
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.interfaces.IBoxCollidable;
+import kr.ac.tukorea.ge.spgp2025.a2dg.framework.interfaces.ITouchable;
 
-public class Player extends TiledSprite implements IBoxCollidable {
+public class Player extends TiledSprite implements IBoxCollidable, ITouchable {
     private final String TAG = getClass().getSimpleName();
     private int startX, startY;
     private int targetX, targetY; //이동 목표
@@ -34,7 +35,8 @@ public class Player extends TiledSprite implements IBoxCollidable {
     }
 
     float touchStartX, touchStartY;
-    public boolean onTouch(MotionEvent event){
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 touchStartX = event.getX();

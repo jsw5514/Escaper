@@ -29,7 +29,7 @@ public class CollisionChecker implements IGameObject {
     @Override
     public void update() {
         //Log.d(TAG,"충돌체크 중");
-        Player player = (Player) scene.objectsAt(MainScene.Layer.player).get(0);
+        Player player = scene.getPlayer();
 
         //플레이어 <-> 적 충돌체크
         ArrayList<IGameObject> enemies = scene.objectsAt(MainScene.Layer.enemy);

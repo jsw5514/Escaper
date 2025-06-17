@@ -27,6 +27,10 @@ public class MainScene extends Scene implements OnStageClearListener {
     private final String TAG = this.getClass().getSimpleName();
     private TiledMapManager mapManager;
     private Player player;
+    public Player getPlayer() {
+        return player;
+    }
+
     private CollisionChecker collisionChecker;
     private Score score;
     private Button pauseBt;
@@ -35,7 +39,7 @@ public class MainScene extends Scene implements OnStageClearListener {
     private int stage;
 
     public enum Layer{
-         map, item, enemy, player, ui, controller;
+         map, item, enemy, ui, controller;
         public static final int COUNT = values().length;
     }
     public MainScene(Context context){
@@ -46,8 +50,6 @@ public class MainScene extends Scene implements OnStageClearListener {
         this.context=context;
         this.mapManager = new TiledMapManager(context, R.mipmap.tileset, R.raw.free_tile_set, MAP_TILE_WIDTH);
         add(Layer.map, mapManager.getMap(stage));
-
-        setGObjPos();
 
         collisionChecker = new CollisionChecker(this);
         collisionChecker.setOnStageClearListener(this);
@@ -68,6 +70,8 @@ public class MainScene extends Scene implements OnStageClearListener {
             }
         });
         add(Layer.ui, pauseBt);
+
+        setGObjPos(); //player, enemy, item 위치 초기화
     }
 
     @Override
@@ -87,7 +91,7 @@ public class MainScene extends Scene implements OnStageClearListener {
             DBManager dbManager = DBManager.getInstance(context);
             dbManager.saveScore(now, score.getScore());
 
-            pop();
+            Scene.pop();
             return;
         }
         add(Layer.map, mapManager.getMap(stage));
@@ -97,7 +101,7 @@ public class MainScene extends Scene implements OnStageClearListener {
     private void setGObjPos() {
         if (player == null) {
             player = new Player(mapManager.getPlayerStart(stage), MAP_TILE_WIDTH);
-            add(Layer.player, player);
+            add(Layer.ui, player);
         }
         else {
             Point startPos = mapManager.getPlayerStart(stage);
@@ -113,21 +117,24 @@ public class MainScene extends Scene implements OnStageClearListener {
         add(Layer.item, new Item(Item.Type.orange, 1, 1, MAP_TILE_WIDTH));
     }
 
+    @Override
+    protected int getTouchLayerIndex() {
+        return Layer.ui.ordinal();
+    }
     public boolean passWall = false;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (isEnableGodMode(event)) return true; //debug god mode
-        if (pauseBt.onTouchEvent(event)){
+        if (isEnableGodMode(event)) { //debug god mode
             return true;
         }
-        else {
-            return player.onTouch(event);
+        else{
+            return super.onTouchEvent(event);
         }
     }
 
     private boolean needConsumeEvent = false;
     private boolean isEnableGodMode(MotionEvent event) {
-        //우하단 지점을 누를시 스테이지 클리어, 그 외 우측 아무 곳이나 누르면 벽 무시
+        //우하단 지점을 누를시 스테이지 클리어, 그 외 우측 아무 곳이나 누르면 이후 이동시 벽 무시
         float[] touchedPos = Metrics.fromScreen(event.getX(), event.getY());
         if (event.getAction() == MotionEvent.ACTION_DOWN && touchedPos[0] > Metrics.width - 100f) {
             if (touchedPos[1] > Metrics.height - 100f){

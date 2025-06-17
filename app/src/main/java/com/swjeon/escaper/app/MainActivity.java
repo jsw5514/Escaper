@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.swjeon.escaper.BuildConfig;
 import com.swjeon.escaper.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
         binding.btStart.setOnClickListener(listenerStart);
         binding.btLeaderBoard.setOnClickListener(listenerLeaderBoard);
         binding.btLeave.setOnClickListener(listenerLeave);
+
+        if (BuildConfig.DEBUG){
+            //call game activity
+            Intent gameActivityIntent = new Intent(this, EscaperActivity.class);
+            startActivity(gameActivityIntent);
+        }
     }
 
     //listeners
@@ -41,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             //call leader board activity
-//            SharedPreferences pref = getApplicationContext().getSharedPreferences("score list", MODE_PRIVATE);
-//            Log.d(TAG, "score: " + pref.getAll());
             Intent leaderBoardActivityIntent = new Intent(v.getContext(), LeaderBoardActivity.class);
             startActivity(leaderBoardActivityIntent);
         }
