@@ -64,7 +64,7 @@ public class MainScene extends Scene implements OnStageClearListener {
             @Override
             public boolean onTouch(boolean pressed) {
                 if (pressed) {
-                    new PauseScene().push();
+                    new PauseScene(score.getScore()).push();
                     return true;
                 }
                 return false;
@@ -73,6 +73,12 @@ public class MainScene extends Scene implements OnStageClearListener {
         add(Layer.ui, pauseBt);
 
         setGObjPos(); //player, enemy, item 위치 초기화
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        new PauseScene(score.getScore()).push();
+        return true;
     }
 
     @Override
@@ -88,8 +94,10 @@ public class MainScene extends Scene implements OnStageClearListener {
             dialog.setOnNameSetListener(new GetNameDialog.OnNameSetListener() {
                 @Override
                 public void onNameSet(String name) {
-                    DBManager dbManager = DBManager.getInstance(context);
-                    dbManager.saveScore(name, score.getScore());
+                    if (name != null) {
+                        DBManager dbManager = DBManager.getInstance(context);
+                        dbManager.saveScore(name, score.getScore());
+                    }
                     Scene.pop();
                 }
             });

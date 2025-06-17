@@ -1,20 +1,25 @@
 package com.swjeon.escaper.game;
 
-import android.view.MotionEvent;
+import android.content.Context;
 
 import com.swjeon.escaper.R;
+import com.swjeon.escaper.game.util.DBManager;
+import com.swjeon.escaper.game.util.GetNameDialog;
 
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.objects.Button;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.objects.Sprite;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;
+import kr.ac.tukorea.ge.spgp2025.a2dg.framework.view.GameView;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.view.Metrics;
 
 public class PauseScene extends Scene {
-    enum PauseSceneLayers {
+    private final int gameScore;
+    public enum PauseSceneLayers {
         bg, ui
     }
-    PauseScene() {
+    PauseScene(int score) {
         initLayers(PauseSceneLayers.values().length);
+        gameScore = score;
 
         //50% 반투명한 배경 설정
         Sprite bg = new Sprite(R.mipmap.trans_50b);
@@ -35,18 +40,31 @@ public class PauseScene extends Scene {
         });
         add(PauseSceneLayers.ui, resumeBt);
 
-        Button exitBt = new Button(R.mipmap.bt_exit, 1500f, 1050f, 500f, 500f, new Button.OnTouchListener() {
-            @Override
-            public boolean onTouch(boolean pressed) {
-                if (pressed) {
-                    popAll();
-                    return true;
-                }
-                return false;
-            }
-        });
+        Button exitBt = new Button(R.mipmap.bt_exit, 1500f, 1050f, 500f, 500f, OnGameExitListener);
         add(PauseSceneLayers.ui, exitBt);
     }
+    private final Button.OnTouchListener OnGameExitListener = new Button.OnTouchListener() {
+        @Override
+        public boolean onTouch(boolean pressed) {
+            if (pressed) {
+                Context context = GameView.view.getContext();
+                GetNameDialog dialog = new GetNameDialog(context, true);
+                dialog.setOnNameSetListener(new GetNameDialog.OnNameSetListener() {
+                    @Override
+                    public void onNameSet(String name) {
+                        if (name != null) {
+                            DBManager dbManager = DBManager.getInstance(context);
+                            dbManager.saveScore(name, gameScore);
+                        }
+                        Scene.popAll();
+                    }
+                });
+                dialog.show();
+                return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     public boolean isTransparent() {
