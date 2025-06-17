@@ -1,9 +1,10 @@
-package com.swjeon.escaper.game;
+package com.swjeon.escaper.game.object;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.util.Log;
 
+import com.swjeon.escaper.game.MainScene;
 import com.swjeon.escaper.game.map.TiledMap;
 import com.swjeon.escaper.game.util.OnStageClearListener;
 
@@ -28,7 +29,7 @@ public class CollisionChecker implements IGameObject {
     @Override
     public void update() {
         //Log.d(TAG,"충돌체크 중");
-        Player player = scene.player;
+        Player player = (Player) scene.objectsAt(MainScene.Layer.player).get(0);
 
         //플레이어 <-> 적 충돌체크
         ArrayList<IGameObject> enemies = scene.objectsAt(MainScene.Layer.enemy);
@@ -39,7 +40,7 @@ public class CollisionChecker implements IGameObject {
             if (colidesE) {
                 Log.i(TAG, "플레이어와 적이 충돌함");
                 player.onCollideEnemy();
-                scene.score.setScore(0);
+                scene.resetScore();
             }
         }
 
@@ -51,7 +52,7 @@ public class CollisionChecker implements IGameObject {
             boolean colidesI = CollisionHelper.collides(player, item);
             if (colidesI) {
                 Log.i(TAG, "플레이어와 아이템이 충돌함");
-                scene.score.add(item.getScore());
+                scene.addScore(item.getScore());
                 scene.remove(MainScene.Layer.item, item);
             }
         }

@@ -1,7 +1,6 @@
-package com.swjeon.escaper.game;
+package com.swjeon.escaper.game.object;
 
 import android.graphics.Point;
-import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;

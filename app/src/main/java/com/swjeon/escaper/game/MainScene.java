@@ -1,7 +1,6 @@
 package com.swjeon.escaper.game;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -9,6 +8,10 @@ import android.view.MotionEvent;
 import com.swjeon.escaper.R;
 import com.swjeon.escaper.game.map.EnemySpawnInfo;
 import com.swjeon.escaper.game.map.TiledMapManager;
+import com.swjeon.escaper.game.object.CollisionChecker;
+import com.swjeon.escaper.game.object.Enemy;
+import com.swjeon.escaper.game.object.Item;
+import com.swjeon.escaper.game.object.Player;
 import com.swjeon.escaper.game.util.DBManager;
 import com.swjeon.escaper.game.util.OnStageClearListener;
 
@@ -20,11 +23,11 @@ import kr.ac.tukorea.ge.spgp2025.a2dg.framework.scene.Scene;
 
 public class MainScene extends Scene implements OnStageClearListener {
     private final String TAG = this.getClass().getSimpleName();
-    TiledMapManager mapManager;
-    Player player;
-    CollisionChecker collisionChecker;
-    Score score;
-    Context context;
+    private TiledMapManager mapManager;
+    private Player player;
+    private CollisionChecker collisionChecker;
+    private Score score;
+    private Context context;
     private final float MAP_TILE_WIDTH = 100f;
     private int stage;
 
@@ -97,7 +100,15 @@ public class MainScene extends Scene implements OnStageClearListener {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) onStageClear(); //test code
+        //if (event.getAction() == MotionEvent.ACTION_DOWN) onStageClear(); //test code
         return player.onTouch(event);
+    }
+
+    public void resetScore() {
+        score.setScore(0);
+    }
+
+    public void addScore(int num) {
+        score.add(num);
     }
 }

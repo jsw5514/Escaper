@@ -1,4 +1,4 @@
-package com.swjeon.escaper.game;
+package com.swjeon.escaper.game.object;
 
 import android.graphics.RectF;
 

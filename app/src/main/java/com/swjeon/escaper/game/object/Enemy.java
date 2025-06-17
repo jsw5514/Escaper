@@ -1,4 +1,4 @@
-package com.swjeon.escaper.game;
+package com.swjeon.escaper.game.object;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,7 +12,6 @@ import com.swjeon.escaper.game.map.EnemySpawnInfo;
 import com.swjeon.escaper.game.util.TiledSprite;
 
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.interfaces.IBoxCollidable;
-import kr.ac.tukorea.ge.spgp2025.a2dg.framework.util.RectUtil;
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.view.GameView;
 
 public class Enemy extends TiledSprite implements IBoxCollidable {

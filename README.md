@@ -174,3 +174,6 @@ PauseScene
 
 Item.java
 맵 데이터에서 item 위치를 불러오도록 수정(현재 임의 위치 고정 생성중)
+
+MainScene.java
+점수저장시 이름으로 저장하도록 수정 
