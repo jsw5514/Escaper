@@ -173,8 +173,8 @@ MainScene에 등장하는 game object에 대하여<br>
 Item.java
 맵 데이터에서 item 위치를 불러오도록 수정(현재 임의 위치 고정 생성중)
 
-MainScene.java
-점수저장시 이름으로 저장하도록 수정 
-
 Player.java
 일정 이하의 작은 드래그에는 이동하지 않게 수정
+
+PauseScene.java
+종료시 점수 저장하도록 수정

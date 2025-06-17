@@ -42,9 +42,9 @@ public class DBManager extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    public void saveScore(LocalDateTime timeStamp, int score) {
+    public void saveScore(String username, int score) {
         final String sql = "INSERT INTO score (timestamp, value) VALUES(?,?)";
-        Object[] parms = new Object[]{timeStamp.toString(), score};
+        Object[] parms = new Object[]{username, score};
         getWritableDatabase().execSQL(sql,parms);
     }
 

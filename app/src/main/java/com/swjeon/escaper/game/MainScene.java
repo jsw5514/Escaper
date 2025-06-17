@@ -13,6 +13,7 @@ import com.swjeon.escaper.game.object.Enemy;
 import com.swjeon.escaper.game.object.Item;
 import com.swjeon.escaper.game.object.Player;
 import com.swjeon.escaper.game.util.DBManager;
+import com.swjeon.escaper.game.util.GetNameDialog;
 import com.swjeon.escaper.game.util.OnStageClearListener;
 
 import java.time.LocalDateTime;
@@ -77,23 +78,29 @@ public class MainScene extends Scene implements OnStageClearListener {
     @Override
     public void onStageClear() {
         score.add(1000); //스테이지 클리어 점수
-        objectsAt(Layer.enemy).clear();
-        objectsAt(Layer.item).clear();
-        objectsAt(Layer.map).clear();
-
         if(++stage >= 3) {
             Log.w(TAG, "게임 클리어. 곧 메인씬이 pop 됨.");
             objectsAt(Layer.controller).clear();
             collisionChecker = null;
 
             //최종 점수 db에 기록
-            LocalDateTime now = LocalDateTime.now();
-            DBManager dbManager = DBManager.getInstance(context);
-            dbManager.saveScore(now, score.getScore());
-
-            Scene.pop();
+            GetNameDialog dialog = new GetNameDialog(context, false);
+            dialog.setOnNameSetListener(new GetNameDialog.OnNameSetListener() {
+                @Override
+                public void onNameSet(String name) {
+                    DBManager dbManager = DBManager.getInstance(context);
+                    dbManager.saveScore(name, score.getScore());
+                    Scene.pop();
+                }
+            });
+            dialog.show();
             return;
         }
+
+        objectsAt(Layer.enemy).clear();
+        objectsAt(Layer.item).clear();
+        objectsAt(Layer.map).clear();
+
         add(Layer.map, mapManager.getMap(stage));
         setGObjPos();
     }
