@@ -1,15 +1,12 @@
 package com.swjeon.escaper.app;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.swjeon.escaper.BuildConfig;
 import com.swjeon.escaper.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

@@ -2,19 +2,10 @@ package com.swjeon.escaper.game.util;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.swjeon.escaper.app.MainActivity;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import kr.ac.tukorea.ge.spgp2025.a2dg.framework.view.GameView;
 
 public class DBManager extends SQLiteOpenHelper {
 

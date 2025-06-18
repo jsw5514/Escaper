@@ -1,6 +1,5 @@
 package com.swjeon.escaper.app;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -14,11 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.swjeon.escaper.databinding.ActivityLeaderBoardBinding;
 import com.swjeon.escaper.game.util.DBManager;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LeaderBoardActivity extends AppCompatActivity {
     ActivityLeaderBoardBinding binding;
