@@ -10,6 +10,7 @@
 local.properties
 gradle/*
 /app/build
+app/release
 
 #exclude list
 !gradle/libs.versions.toml
