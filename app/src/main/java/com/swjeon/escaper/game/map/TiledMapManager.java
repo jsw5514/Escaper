@@ -8,6 +8,7 @@ import android.util.Log;
 import com.swjeon.escaper.R;
 import com.swjeon.escaper.game.map.tileset.Converter;
 import com.swjeon.escaper.game.map.tileset.TileSet;
+import com.swjeon.escaper.game.object.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -102,6 +103,7 @@ public class TiledMapManager {
 
         //가져온 json 객체에서 맵 데이터 추출(단일 레이어, 단일 타일셋 맵을 가정)
         for(JSONObject jsonMapData :jsonMapDatas){
+            Log.w(TAG,"새 맵 데이터 로딩을 시작합니다.");
             try {
                 //load layers
                 JSONArray layers = jsonMapData.getJSONArray("layers");
@@ -121,6 +123,7 @@ public class TiledMapManager {
                 //load object layer
                 JSONArray objectLayer = layers.getJSONObject(1).getJSONArray("objects");
                 Point playerStart = new Point();
+                ArrayList<ItemSpawnInfo> itemPos = new ArrayList<>();
                 ArrayList<EnemySpawnInfo> enemySpawnInfos = new ArrayList<>();
                 for(int i = 0; i<objectLayer.length(); i++){
                     JSONObject mapObject = objectLayer.getJSONObject(i);
@@ -128,10 +131,18 @@ public class TiledMapManager {
                     switch (mapObject.getString("type")){
                         case "player":
                             //타일 좌표계로 변환
-                            int x = mapObject.getInt("x") / (int) tileSet.getTilewidth();
-                            int y = mapObject.getInt("y") / (int) tileSet.getTilewidth();
-                            playerStart.set(x,y);
-                            Log.d(TAG,"플레이어 위치 로딩 완료 " + x + ", " + y);
+                            int playerX = mapObject.getInt("x") / (int) tileSet.getTilewidth();
+                            int playerY = mapObject.getInt("y") / (int) tileSet.getTilewidth();
+                            playerStart.set(playerX,playerY);
+                            Log.d(TAG,"플레이어 위치 로딩 완료 " + playerX + ", " + playerY);
+                            break;
+                        case "item":
+                            int itemX = mapObject.getInt("x") / (int) tileSet.getTilewidth();
+                            int itemY = mapObject.getInt("y") / (int) tileSet.getTilewidth();
+                            int typeIndex = Integer.parseInt(mapObject.getString("name")) - 1;
+                            Item.Type type = Item.Type.values()[typeIndex];
+                            itemPos.add(new ItemSpawnInfo(itemX, itemY, type));
+                            Log.d(TAG,"아이템 위치 로딩 완료 " + itemX + ", " + itemY);
                             break;
                         case "enemy":
                             //ensure size of list
@@ -171,7 +182,7 @@ public class TiledMapManager {
                 }
 
                 //add in map data bundle
-                mapDataBundles.add(new MapDataBundle(map, playerStart, enemySpawnInfos));
+                mapDataBundles.add(new MapDataBundle(map, playerStart, enemySpawnInfos, itemPos));
             } catch (JSONException e) {
                 Log.e(TAG,"error while converting json to map bundle");
                 throw new RuntimeException(e);
@@ -183,4 +194,5 @@ public class TiledMapManager {
     }
     public Point getPlayerStart(int mapIndex) { return mapDataBundles.get(mapIndex).getPlayerStart(); }
     public ArrayList<EnemySpawnInfo> getEnemyInfos(int mapIndex) { return mapDataBundles.get(mapIndex).getEnemySpawnInfos(); }
+    public ArrayList<ItemSpawnInfo> getItemSpawnInfos(int mapIndex) { return mapDataBundles.get(mapIndex).getItemSpawnInfos(); }
 }

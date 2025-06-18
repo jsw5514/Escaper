@@ -170,5 +170,5 @@ MainScene에 등장하는 game object에 대하여<br>
 
 #### Todo List ####
 미구현 클래스 목록
-Item.java
-맵 데이터에서 item 위치를 불러오도록 수정(현재 임의 위치 고정 생성중)
+MapDataBundle.java
+고정 스테이지 방식으로 할거면 EnemySpawnInfo를 쓰는 대신 그냥 Enemy를 생성해서 갖고 있어도 될 것 같다.

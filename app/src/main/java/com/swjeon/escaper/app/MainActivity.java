@@ -27,12 +27,6 @@ public class MainActivity extends AppCompatActivity {
         binding.btStart.setOnClickListener(listenerStart);
         binding.btLeaderBoard.setOnClickListener(listenerLeaderBoard);
         binding.btLeave.setOnClickListener(listenerLeave);
-
-        if (BuildConfig.DEBUG){
-            //call game activity
-            Intent gameActivityIntent = new Intent(this, EscaperActivity.class);
-            startActivity(gameActivityIntent);
-        }
     }
 
     //listeners

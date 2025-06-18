@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 
 import com.swjeon.escaper.R;
 import com.swjeon.escaper.game.map.EnemySpawnInfo;
+import com.swjeon.escaper.game.map.ItemSpawnInfo;
 import com.swjeon.escaper.game.map.TiledMapManager;
 import com.swjeon.escaper.game.object.CollisionChecker;
 import com.swjeon.escaper.game.object.Enemy;
@@ -16,7 +17,6 @@ import com.swjeon.escaper.game.util.DBManager;
 import com.swjeon.escaper.game.util.GetNameDialog;
 import com.swjeon.escaper.game.util.OnStageClearListener;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import kr.ac.tukorea.ge.spgp2025.a2dg.framework.objects.Button;
@@ -129,7 +129,10 @@ public class MainScene extends Scene implements OnStageClearListener {
             add(Layer.enemy, new Enemy(spawnInfo, MAP_TILE_WIDTH));
         }
 
-        add(Layer.item, new Item(Item.Type.orange, 1, 1, MAP_TILE_WIDTH));
+        ArrayList<ItemSpawnInfo> itemSpawnInfos = mapManager.getItemSpawnInfos(stage);
+        for (ItemSpawnInfo itemSpawnInfo:itemSpawnInfos) {
+            add(Layer.item, new Item(itemSpawnInfo.type, itemSpawnInfo.x, itemSpawnInfo.y, MAP_TILE_WIDTH));
+        }
     }
 
     @Override

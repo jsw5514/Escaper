@@ -8,11 +8,13 @@ public class MapDataBundle {
     private TiledMap map;
     private Point playerStart;
     private ArrayList<EnemySpawnInfo> enemySpawnInfos;
+    private ArrayList<ItemSpawnInfo> itemSpawnInfos;
 
-    public MapDataBundle(TiledMap map, Point playerStart, ArrayList<EnemySpawnInfo> enemySpawnInfos) {
+    public MapDataBundle(TiledMap map, Point playerStart, ArrayList<EnemySpawnInfo> enemySpawnInfos, ArrayList<ItemSpawnInfo> itemPos) {
         this.map = map;
         this.playerStart = playerStart;
         this.enemySpawnInfos = enemySpawnInfos;
+        this.itemSpawnInfos = itemPos;
     }
 
     public TiledMap getMap() {
@@ -25,5 +27,9 @@ public class MapDataBundle {
 
     public ArrayList<EnemySpawnInfo> getEnemySpawnInfos() {
         return enemySpawnInfos;
+    }
+
+    public ArrayList<ItemSpawnInfo> getItemSpawnInfos() {
+        return itemSpawnInfos;
     }
 }
