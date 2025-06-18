@@ -47,14 +47,18 @@ public class CollisionChecker implements IGameObject {
         //플레이어 <-> 아이템 충돌체크
         ArrayList<IGameObject> items = scene.objectsAt(MainScene.Layer.item);
         Iterator<IGameObject> itemIt = items.iterator();
+        ArrayList<Item> needToRemove = new ArrayList<>();
         while (itemIt.hasNext()) {
             Item item = (Item) itemIt.next();
             boolean colidesI = CollisionHelper.collides(player, item);
             if (colidesI) {
                 Log.i(TAG, "플레이어와 아이템이 충돌함");
                 scene.addScore(item.getScore());
-                scene.remove(MainScene.Layer.item, item);
+                needToRemove.add(item);
             }
+        }
+        for (Item item:needToRemove) {
+            scene.remove(MainScene.Layer.item, item);
         }
 
         if (scene.passWall) return; //check debug god mode
